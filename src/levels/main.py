@@ -1,7 +1,5 @@
-# rodar o jogo, apenas com o level.py
 
 import pygame
-import pymunk as pm
 import home
 
 def main():
@@ -10,13 +8,15 @@ def main():
     height = 700
     display = pygame.display.set_mode((width, height))
     clock = pygame.time.Clock()
-    home.home(display, clock)
-    
+    FPS = 60
 
-    # nivel = level.level()
-    # window, assets, state = nivel.inicializa()
-    # nivel.gameloop(window, assets, state)
-    # nivel.finaliza()
+    level = home.home(display)
+    while True:
+        if level.atualiza_estado():
+            level.desenha()
+        else:
+            break
+        clock.tick(FPS)
 
 if __name__ == '__main__':
     main()
