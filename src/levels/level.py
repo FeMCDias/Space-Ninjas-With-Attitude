@@ -1,9 +1,8 @@
 import pygame
 import pymunk as pm
 import math
-
+import interface
 class level:
-
     def __init__(self) -> None:
         pygame.init()
         pygame.mixer.init()
@@ -21,13 +20,6 @@ class level:
         self.state = {
             'quitou': False,
         }
-        self.mouse_distance = 0
-        self.rope_length = 90
-        self.angle = 0
-        self.x_mouse = 0
-        self.y_mouse = 0
-        self.sling_x, self.sling_y = 135, 450
-        self.sling2_x, self.sling2_y = 160, 450
 
     def inicializa(self):
         return self.window, self.assets, self.state
@@ -87,40 +79,6 @@ class level:
         """Return the unit vector of the vector v"""
         norm = math.sqrt(v[0]**2+v[1]**2)
         return (v[0]/norm, v[1]/norm)
-    
-    def sling_action(self):
-        v = self.vector((self.sling_x, self.sling_y), (self.x_mouse, self.y_mouse))
-        uv = self.unit_vector(v)
-        uv1 = uv[0]
-        uv2 = uv[1]
-        mouse_distance = self.distancia(self.sling_x, self.sling_y, self.x_mouse, self.y_mouse)
-        pu = (uv1*self.rope_length+self.sling_x, uv2*self.rope_length+self.sling_y)
-        bigger_rope = 102
-        x_redbird = self.x_mouse - 20
-        y_redbird = self.y_mouse - 20
-        if mouse_distance > self.rope_lenght:
-            pux, puy = pu
-            pux -= 20
-            puy -= 20
-            pul = pux, puy
-            self.window.blit(self.redbird, pul)
-            pu2 = (uv1*bigger_rope+self.sling_x, uv2*bigger_rope+self.sling_y)
-            pygame.draw.line(self.window, (0, 0, 0), (self.sling2_x, self.sling2_y), pu2, 5)
-            self.window.blit(self.redbird, pul)
-            pygame.draw.line(self.window, (0, 0, 0), (sling_x, sling_y), pu2, 5)
-        else:
-            mouse_distance += 10
-            pu3 = (uv1*mouse_distance+sling_x, uv2*mouse_distance+sling_y)
-            pygame.draw.line(self.window, (0, 0, 0), (sling2_x, sling2_y), pu3, 5)
-            self.window.blit(redbird, (x_redbird, y_redbird))
-            pygame.draw.line(self.window, (0, 0, 0), (sling_x, sling_y), pu3, 5)
-        # Angle of impulse
-        dy = self.y_mouse - self.sling_y
-        dx = self.x_mouse - self.sling_x
-        if dx == 0:
-            dx = 0.00000000000001
-        angle = math.atan((float(dy))/dx)
-
 
     def finaliza(self):
         pygame.quit()
