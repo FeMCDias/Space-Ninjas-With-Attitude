@@ -1,15 +1,16 @@
 import pygame
-import interface.interface as interface
+from interface import *
 import levels.level as level
 
 class Home:
     def __init__(self, display):
         self.display = display
         self.buttons = []
-        self.buttons.append(interface.Button(100, 100, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
+        self.buttons.append(Button(100, 100, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
         self.buttons[0].add_text('Start')
-        self.buttons.append(interface.Button(100, 300, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
+        self.buttons.append(Button(100, 300, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
         self.buttons[1].add_text('Quit')
+        self.state = {}
 
     def desenha(self, display):
         self.display = display
