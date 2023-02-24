@@ -16,6 +16,8 @@ class level:
         self.assets = {
             'catapulta': pygame.image.load('../assets/images/catapulta.png'),
             'shuriken': pygame.image.load('../assets/images/shuriken.png'),
+            'kunai': pygame.image.load('../assets/images/kunai.png'),
+            'katana': pygame.image.load('../assets/images/katana.png'),
         }
         self.state = {
             'atirando': False,
@@ -31,8 +33,14 @@ class level:
         window.fill((0, 0, 0))
 
     def desenha(self, window: pygame.Surface, assets, state): 
+        if state['weapon'] == 'katana':
+            window.blit(pygame.transform.scale(assets['katana'], (50, 100)), (180, 500))
+        elif state['weapon'] == 'kunai':
+            window.blit(pygame.transform.scale(assets['kunai'], (50, 100)), (180, 500))
+        elif state['weapon'] == 'shuriken':
+            window.blit(pygame.transform.scale(assets['shuriken'], (50, 50)), (180, 500))
+
         window.blit(pygame.transform.scale(assets['catapulta'], (50, 100)), (180, 500))
-        window.blit(pygame.transform.scale(assets['shuriken'], (50, 50)), (180, 500))
         pygame.display.update()
 
     def distancia(self, x1, y1, x2, y2):
