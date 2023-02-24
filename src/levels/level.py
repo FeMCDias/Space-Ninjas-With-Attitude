@@ -14,10 +14,12 @@ class level:
         self.space = pm.Space()
         self.space.gravity = (0.0, -900.0)
         self.assets = {
-            'catapulta': pygame.image.load('assets/images/catapulta.png'),
-            'redbird': pygame.image.load('assets/images/shuriken.png'),
+            'catapulta': pygame.image.load('../assets/images/catapulta.png'),
+            'shuriken': pygame.image.load('../assets/images/shuriken.png'),
         }
         self.state = {
+            'atirando': False,
+            'atirou': False,
             'quitou': False,
         }
 
@@ -29,8 +31,8 @@ class level:
         window.fill((0, 0, 0))
 
     def desenha(self, window: pygame.Surface, assets, state): 
-        window.blit(pygame.transform.scale(assets['catapulta'], (50, 100)), (150, 400))
-        window.blit(pygame.transform.scale(assets['redbird'], (50, 50)), (200, 450))
+        window.blit(pygame.transform.scale(assets['catapulta'], (50, 100)), (180, 500))
+        window.blit(pygame.transform.scale(assets['shuriken'], (50, 50)), (180, 500))
         pygame.display.update()
 
     def distancia(self, x1, y1, x2, y2):
@@ -55,11 +57,18 @@ class level:
             if ev.type == pygame.QUIT:
                 return False
             elif ev.type == pygame.MOUSEBUTTONDOWN:
-                if ev.button == 1:
-                    state['mouse_pressed'] = True
+                if self.colisao_ponto_circulo(ev.pos[0], ev.pos[1], 180, 500, 50) and not state['atirou']: 
+                    state['atirando'] = True
             elif ev.type == pygame.MOUSEBUTTONUP:
-                if ev.button == 1:
-                    state['mouse_pressed'] = False
+                if state['atirando']:
+                    state['atirando'] = False
+                    state['atirou'] = True
+            if state['atirando']:
+                state['vetor'] = self.vector((180, 500), ev.pos)
+                print(state['atirando'], state['atirou'])
+            if state['atirou']:
+                state['atirou'] = False
+                print(state['vetor'])
         return True
 
     def gameloop(self, window, assets, state):
