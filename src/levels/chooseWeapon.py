@@ -1,17 +1,20 @@
 import pygame
 from interface import *
+from weapons.weapon import *
 import levels.level as level
-import levels.chooseWeapon as chooseWeapon
 
-class Home:
+class chooseWeapon:
     def __init__(self, display):
         self.display = display
         self.buttons = []
         self.buttons.append(Button(100, 100, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
-        self.buttons[0].add_text('Start')
+        self.buttons[0].add_text('Katana')
         self.buttons.append(Button(100, 300, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
-        self.buttons[1].add_text('Quit')
+        self.buttons[1].add_text('Shuriken')
+        self.buttons.append(Button(100, 500, 200, 100, None, (255, 0, 0), None, (0, 0, 0)))
+        self.buttons[2].add_text('Kunai')
         self.state = {}
+        self.level = 1
 
     def desenha(self, display):
         self.display = display
@@ -26,15 +29,19 @@ class Home:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if self.buttons[0].is_clicked(mouse_pos):
-                    nivel = chooseWeapon.chooseWeapon(self.display)
-                    nivel.desenha(self.display)
-                    while nivel.atualiza_estado():
-                        nivel.desenha(self.display)
-                    return False
+                    self.state['weapon'] = Weapon('katana',self.level)
                 if self.buttons[1].is_clicked(mouse_pos):
-                    return False
+                    self.state['weapon'] = Weapon('shuriken',self.level)
+                if self.buttons[2].is_clicked(mouse_pos):
+                    self.state['weapon'] = Weapon('kunai',self.level)
+                nivel = level.level() 
+                nivel.state.update({'weapon': self.state['weapon'].name,
+                                'amount': self.state['weapon'].ammo})
+            
+                window, assets, state = nivel.inicializa()
+                nivel.gameloop(window, assets, state)
+                nivel.finaliza()
         return True
     
     def get_state(self):
         return self.state
-    
