@@ -1,4 +1,3 @@
-# class weapon with 3 subclasses: shuriken, katana, and kunai. the nature of the object is defined in the constructor, a string with the name of the weapon
 class Weapon:
     def __init__(self, name, level):
         self.name = name
