@@ -80,6 +80,7 @@ class level:
         norm = math.sqrt(v[0]**2+v[1]**2)
         return (v[0]/norm, v[1]/norm)
 
+
     def finaliza(self):
         pygame.quit()
 

@@ -19,37 +19,21 @@ class Home:
         pygame.display.update()
 
     def atualiza_estado(self):
-  
-        for ev in pygame.event.get():
-            if ev.type == pygame.QUIT:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 return False
-            elif ev.type == pygame.MOUSEBUTTONDOWN:
-                if ev.button == 1:
-                    self.state['mouse_pressed'] = True
-            elif ev.type == pygame.MOUSEBUTTONUP:
-                if ev.button == 1:
-                    self.state['mouse_pressed'] = False
-            elif ev.type == pygame.MOUSEMOTION:
-                self.state['mouse_pos'] = ev.pos
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if self.buttons[0].is_clicked(mouse_pos):
+                    nivel = level.level()
+                    window, assets, state = nivel.inicializa()
+                    nivel.gameloop(window, assets, state)
+                    nivel.finaliza()
+                    return False
+                if self.buttons[1].is_clicked(mouse_pos):
+                    return False
         return True
     
-    def gameloop(self, display, assets, state):
-        self.display = display
-        self.assets = assets
-        self.state = state
-        while self.atualiza_estado(self.assets, self.state):
-            self.desenha(self.display, self.assets, self.state)
-            for button in self.buttons:
-                if button.is_clicked(self.state['mouse_pos']):
-                    if button.text == 'Start':
-                        nivel = level.Level(self.display, self.assets, self.state)
-                        nivel.gameloop()
-                        
-                    elif button.text == 'Quit':
-                        return False
-        return True
+    def get_state(self):
+        return self.state
     
-    def finaliza(self):
-        pygame.quit()
-
-
