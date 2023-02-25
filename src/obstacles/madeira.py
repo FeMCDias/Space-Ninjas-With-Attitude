@@ -19,6 +19,8 @@ class Madeira:
                 self.image = 'madeira_left_66.png'
             elif life == 33:
                 self.image = 'madeira_left_33.png'
+            elif life == 0:
+                self.image = 'madeira_left_0.png'
         elif type == 'right':
             if life == 100:
                 self.image = 'madeira_right_100.png'
@@ -26,6 +28,8 @@ class Madeira:
                 self.image = 'madeira_right_66.png'
             elif life == 33:
                 self.image = 'madeira_right_33.png'
+            elif life == 0:
+                self.image = 'madeira_right_0.png'
 
     def set_life(self, life):
         self.vida = life

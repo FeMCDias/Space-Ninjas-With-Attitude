@@ -7,7 +7,7 @@ class level:
     def __init__(self) -> None:
         pygame.init()
         pygame.mixer.init()
-        self.window = pygame.display.set_mode((1244, 700), vsync=True, flags=pygame.SCALED)
+        self.window = pygame.display.set_mode((1220, 650), vsync=True, flags=pygame.SCALED)
         pygame.key.set_repeat(50)
         self.BLACK = (0, 0, 0)
         self.clock = pygame.time.Clock()
@@ -16,9 +16,29 @@ class level:
         self.space.gravity = (0.0, -900.0)
         self.assets = {
             'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
-            'shuriken': pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),
-            'kunai': pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),
+            'enemy1': pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),
+            'enemy2': pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),
+            'enemy3': pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),
+            'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
+            'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
             'katana': pygame.image.load(os.path.join('assets', 'images', 'katana.png')),
+            'kunai-for-character': pygame.image.load(os.path.join('assets', 'images', 'kunai-for-character.png')),
+            'kunai-ninja': pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png')),
+            'kunai': pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),
+            'madeira_left_100': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_100.png')),
+            'madeira_left_66': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_66.png')),
+            'madeira_left_33': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_33.png')),
+            'madeira_left_0': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0.png')),
+            'madeira_right_100': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_100.png')),
+            'madeira_right_66': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_66.png')),
+            'madeira_right_33': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),
+            'madeira_right_0': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),
+            'ninja-main': pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),
+            'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
+            'shuriken': pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),
+            'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png')),
+            # add all images from assets here
+
         }
         self.state = {
             'atirando': False,
@@ -35,16 +55,16 @@ class level:
     # apenas para a formações das telas de menu, regras e morte
     def desenha_tela(self, window: pygame.Surface, state):
         window.fill((0, 0, 0))
+        self.window.blit(self.assets['fundo'], (0, 0))
 
     def desenha(self, window: pygame.Surface, assets, state): 
+        window.blit(pygame.transform.scale(assets['ninja-main'], (50, 100)), (180, 500))
         if state['weapon'] == 'katana':
-            window.blit(pygame.transform.scale(assets['katana'], (50, 100)), (180, 500))
+            window.blit(pygame.transform.scale(assets['katana'], (50, 100)), (220, 480))
         elif state['weapon'] == 'kunai':
-            window.blit(pygame.transform.scale(assets['kunai'], (50, 100)), (180, 500))
+            window.blit(pygame.transform.scale(assets['kunai'], (50, 100)), (220, 510))
         elif state['weapon'] == 'shuriken':
-            window.blit(pygame.transform.scale(assets['shuriken'], (50, 50)), (180, 500))
-
-        window.blit(pygame.transform.scale(assets['catapulta'], (50, 100)), (180, 500))
+            window.blit(pygame.transform.scale(assets['shuriken'], (25, 25)), (220, 550))
         pygame.display.update()
 
     def distancia(self, x1, y1, x2, y2):
