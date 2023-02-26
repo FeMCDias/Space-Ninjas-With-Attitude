@@ -1,6 +1,6 @@
 import pygame
 class Button:
-    def __init__(self, x, y, w, h, text, color, font, font_color):
+    def __init__(self, x, y, w, h, text, color, font, font_color, radius=-1):
         self.x = x
         self.y = y
         self.w = w
@@ -10,14 +10,16 @@ class Button:
         self.color = color
         self.font = font
         self.font_color = font_color
+        self.radius = radius
 
     def add_text(self, text, size = 25, text_color = (0, 0, 0)):
-        self.font = pygame.font.SysFont('Arial', size)
+        if self.font == None:
+            self.font = pygame.font.SysFont('Arial', size)
         self.text = self.font.render(text, True, text_color)
         self.text_pos = self.text.get_rect()
 
     def draw(self, display):
-        pygame.draw.rect(display, self.color, (self.x, self.y, self.w, self.h))
+        pygame.draw.rect(display, self.color, (self.x, self.y, self.w, self.h), border_radius=self.radius)
         self.text_pos.center = (self.x + self.w/2, self.y + self.h/2)
         display.blit(self.text, self.text_pos)
 

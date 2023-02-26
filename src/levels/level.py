@@ -58,13 +58,13 @@ class level:
         self.window.blit(self.assets['fundo'], (0, 0))
 
     def desenha(self, window: pygame.Surface, assets, state): 
-        window.blit(pygame.transform.scale(assets['ninja-main'], (50, 100)), (180, 500))
+        window.blit(pygame.transform.scale(assets['ninja-main'], (67, 100)), (180, 500))
         if state['weapon'] == 'katana':
-            window.blit(pygame.transform.scale(assets['katana'], (50, 100)), (220, 480))
+            window.blit(pygame.transform.scale(assets['katana'], (50, 80)), (237, 487))
         elif state['weapon'] == 'kunai':
-            window.blit(pygame.transform.scale(assets['kunai'], (50, 100)), (220, 510))
+            window.blit(pygame.transform.scale(assets['kunai'], (50, 100)), (237, 510))
         elif state['weapon'] == 'shuriken':
-            window.blit(pygame.transform.scale(assets['shuriken'], (25, 25)), (220, 550))
+            window.blit(pygame.transform.scale(assets['shuriken'], (25, 25)), (237, 550))
         pygame.display.update()
 
     def distancia(self, x1, y1, x2, y2):
