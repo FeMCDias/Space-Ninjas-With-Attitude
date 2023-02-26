@@ -96,21 +96,32 @@ class level:
         pygame.display.update()
         return bola
     
-    
+    def reblit(self, window, state):
+        self.window.fill((0, 0, 0))
+        self.window.blit(self.assets['fundo'], (0, 0))
+        self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
+        if state['weapon'] == 'katana':
+            self.window.blit(pygame.transform.scale(self.assets['katana'], (50, 80)), (237, 487))
+        elif state['weapon'] == 'kunai':
+            self.window.blit(pygame.transform.scale(self.assets['kunai'], (50, 100)), (237, 510))
+        elif state['weapon'] == 'shuriken':
+            self.window.blit(pygame.transform.scale(self.assets['shuriken'], (25, 25)), (237, 550))
+
 
     def atualiza_estado(self, assets, state):
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return False
             elif ev.type == pygame.MOUSEBUTTONDOWN:
-                if self.colisao_ponto_circulo(ev.pos[0], ev.pos[1], 180, 500, 50) and not state['atirou']: 
+                if self.colisao_ponto_circulo(ev.pos[0], ev.pos[1], 230, 550, 70) and not state['atirou']: 
                     state['atirando'] = True
                     while ev.type != pygame.MOUSEBUTTONUP:
                         for ev in pygame.event.get():
                             if ev.type == pygame.MOUSEMOTION:
-                                state['vetor'] = self.vector((180, 500), ev.pos)
-                                self.direcao = self.vector((180, 500), ev.pos)
-                                self.desenha_flecha(self.window, (180, 500), self.direcao)
+                                state['vetor'] = self.vector((238, 562), ev.pos)
+                                self.direcao = self.vector((238, 562), ev.pos)
+                                self.reblit(self.window, state)
+                                self.desenha_flecha(self.window, (238, 562), self.direcao)
                                 pygame.display.update()
                         
             elif ev.type == pygame.MOUSEBUTTONUP:
