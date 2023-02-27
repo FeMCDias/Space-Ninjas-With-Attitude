@@ -2,11 +2,14 @@ import pygame
 from interface import *
 from weapons.weapon import *
 import fases.level as level
+import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
 class chooseWeapon:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
+        self.next_screen = 'level'
+        self.screen_name='chooseWeapon'
         self.display = display
         self.buttons = []
         self.buttons.append(Button(100, 100, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
@@ -17,6 +20,7 @@ class chooseWeapon:
         self.buttons[2].add_text('Kunai')
         self.state = {}
         self.level = 1
+        self.clicked = False
 
     def desenha(self, display):
         katana_ninja = pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png'))
@@ -42,25 +46,26 @@ class chooseWeapon:
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                clicked = False
                 mouse_pos = pygame.mouse.get_pos()
                 if self.buttons[0].is_clicked(mouse_pos):
                     self.state['weapon'] = Weapon('katana',self.level)
-                    clicked = True
+                    self.clicked = True
                 if self.buttons[1].is_clicked(mouse_pos):
                     self.state['weapon'] = Weapon('shuriken',self.level)
-                    clicked = True
+                    self.clicked = True
                 if self.buttons[2].is_clicked(mouse_pos):
                     self.state['weapon'] = Weapon('kunai',self.level)
-                    clicked = True
-                if clicked:
-                    nivel = level.level() 
-                    nivel.state.update({'weapon': self.state['weapon'].name,
-                                    'amount': self.state['weapon'].ammo})
-                    window, assets, state = nivel.inicializa()
-                    nivel.gameloop(window, assets, state)
-                    nivel.finaliza()
+                    self.clicked = True
+                if self.clicked:
+                    updates = self.information_next_screen()
+                    return gerenciadorTelas.GerenciadorTelas(self.display,updates).set_state(self.next_screen)
         return True
     
     def get_state(self):
         return self.state
+    
+    def information_next_screen(self):
+        return {
+            'weapon': self.state['weapon'].name,
+            'ammo': self.state['weapon'].ammo,
+        }
