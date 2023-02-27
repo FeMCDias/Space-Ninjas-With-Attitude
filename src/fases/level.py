@@ -5,6 +5,7 @@ import interface
 import os
 import numpy as np
 import weapons.ball as Ball
+import weapons.weapon as Weapon
 
 class level():
     def __init__(self, display, updates) -> None:
@@ -53,13 +54,13 @@ class level():
                 'center': (0, 0),
             }
         }
-        self.state.update(updates)
-
-        #weapon:
-        #lançamento da arma
+        self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
+        
         self.pos_mouse = np.array([0, 0])
-        # weapon = Ball(self.pos_mouse,self.window,self.level,self.state.weapon)
-        # print(weapon.get_name())
+        ball = Ball.Ball(self.state['weapon'],self.level,self.pos_mouse, [1220,650])
+        print(ball.get_name())
+
+
 
     def inicializa(self):
         return self.window, self.assets, self.state

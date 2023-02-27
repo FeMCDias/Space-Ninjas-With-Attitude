@@ -3,8 +3,8 @@ import pygame as pg
 import weapons.weapon as Weapon
 
 class Ball(Weapon.Weapon):
-    def __init__(self, posicao, screen, level, name):
-        super().__init__(name, level)
+    def __init__(self, nome, level, posicao, screen):
+        super().__init__(nome, level)
         self.posicao = posicao
         self.velocidade = np.array([0, 0])
         self.screen = pg.Surface(screen)
