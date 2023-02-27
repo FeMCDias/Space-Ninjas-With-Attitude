@@ -1,22 +1,17 @@
 
 import pygame
-from screens.home import *
+import screens.gerenciadorTelas
 
 def main():
     pygame.init()
-    width = 1200
-    height = 700
+    width = 1220
+    height = 650
     display = pygame.display.set_mode((width, height))
-    clock = pygame.time.Clock()
-    FPS = 60
 
-    level = Home(display)
-    while True:
-        if level.atualiza_estado():
-            level.desenha(display)
-        else:
-            break
-        clock.tick(FPS)
+    screen = screens.gerenciadorTelas.GerenciadorTelas(display)
+    screen.game_loop()
+    screen.finaliza()
+
 
 if __name__ == '__main__':
     main()

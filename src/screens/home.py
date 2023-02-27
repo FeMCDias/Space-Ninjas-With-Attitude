@@ -1,12 +1,13 @@
 import pygame
 from interface import *
-import fases.level as level
-import screens.chooseWeapon as chooseWeapon
+import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
 class Home:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
+        self.next_screen = 'chooseWeapon'
+        self.screen_name = 'home'
         self.display = display
         self.buttons = []
         self.buttons.append(Button(400, 450, 200, 100, None, (255, 0, 0), font, (0, 0, 0),30))
@@ -36,11 +37,7 @@ class Home:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if self.buttons[0].is_clicked(mouse_pos):
-                    nivel = chooseWeapon.chooseWeapon(self.display)
-                    nivel.desenha(self.display)
-                    while nivel.atualiza_estado():
-                        nivel.desenha(self.display)
-                    return False
+                    return gerenciadorTelas.GerenciadorTelas(self.display).set_state(self.next_screen)
                 if self.buttons[1].is_clicked(mouse_pos):
                     return False
         return True
