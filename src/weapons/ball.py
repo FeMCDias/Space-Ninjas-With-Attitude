@@ -13,8 +13,10 @@ class Ball(Weapon.Weapon):
         self.pos_centro = self.posicao + np.array([self.screen.get_height()/2, self.screen.get_width()/2])
         self.qtd_lancamentos = 0
 
-    def desenha(self):
-        pg.draw.circle(self.screen, (255, 255, 255), self.posicao, 10)
+    def desenha(self,window):
+        rect = pg.Rect(self.posicao, self.screen.get_size())
+        self.screen.fill((255,255,255))
+        window.blit(self.screen,rect)
 
 
     def modulo_vetor(self, vetor):
@@ -25,16 +27,17 @@ class Ball(Weapon.Weapon):
         if self.qtd_lancamentos < self.qtd_max_lancamentos:
             return True
 
-    def lancamento(self, attempt, pos_mouse):
+    def lancamento(self, pos_mouse):
         if self.status == 'NÃO LANÇADA':
             direcao = np.array([pos_mouse[0] - self.pos_centro[0], pos_mouse[1] - self.pos_centro[1]])
             norm_vetor = self.modulo_vetor(direcao)
-            aceleracao = np.array([direcao[0]/norm_vetor, direcao[1]/norm_vetor])
-            magnitude = abs(direcao[0]) + abs(direcao[1])
-            self.velocidade = np.array([aceleracao[0]*magnitude, aceleracao[1]*magnitude])
+            aceleracao = direcao/norm_vetor
+            magnitude = abs(aceleracao[0]) + abs(aceleracao[1])
+            self.velocidade = np.array([aceleracao[0]/magnitude, aceleracao[1]/magnitude])
+        return True
     
-    def movimento(self):
-        self.pos = self.posicao * 0.1 + self.velocidade
+    def movimentar_bola(self):
+        self.pos = self.posicao + 0.05 * self.velocidade
 
     def reinicia(self):
         self.posicao = np.array([0, 0])

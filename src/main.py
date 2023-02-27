@@ -7,7 +7,6 @@ def main():
     width = 1220
     height = 650
     display = pygame.display.set_mode((width, height))
-
     screen = screens.gerenciadorTelas.GerenciadorTelas(display)
     screen.game_loop()
     screen.finaliza()
