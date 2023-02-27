@@ -1,12 +1,12 @@
 import pygame
 from interface import *
 from weapons.weapon import *
-import levels.level as level
+import fases.level as level
 import os
 
 class chooseWeapon:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.display = display
         self.buttons = []
         self.buttons.append(Button(100, 100, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
@@ -19,10 +19,10 @@ class chooseWeapon:
         self.level = 1
 
     def desenha(self, display):
-        katana_ninja = pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png'))
-        shuriken_ninja = pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png'))
-        kunai_ninja = pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png'))
-        fundo = pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg'))
+        katana_ninja = pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png'))
+        shuriken_ninja = pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png'))
+        kunai_ninja = pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png'))
+        fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
         self.display.blit(fundo, (0, 0))
         self.display = display
         for button in self.buttons:

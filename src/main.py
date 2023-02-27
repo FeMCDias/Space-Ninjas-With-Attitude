@@ -1,6 +1,6 @@
 
 import pygame
-from levels.home import *
+from screens.home import *
 
 def main():
     pygame.init()

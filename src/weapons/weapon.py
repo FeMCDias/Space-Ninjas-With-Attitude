@@ -38,4 +38,14 @@ class Weapon:
             self.ammo = 5 + level * 2
         else:
             raise Exception('Invalid weapon name')
+        
+    def get_ammo(self):
+        return self.ammo
+    
+    def get_damage(self):
+        return self.damage
+    
+    def get_name(self):
+        return self.name
+        
 

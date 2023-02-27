@@ -3,6 +3,8 @@ import pymunk as pm
 import math
 import interface
 import os
+import numpy as np
+
 class level:
     def __init__(self) -> None:
         pygame.init()
@@ -14,29 +16,31 @@ class level:
         self.FPS = 60  # Frames per Second
         self.space = pm.Space()
         self.space.gravity = (0.0, -900.0)
+        
+        #Imagens
         self.assets = {
-            'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
-            'enemy1': pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),
-            'enemy2': pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),
-            'enemy3': pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),
-            'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
-            'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
-            'katana': pygame.image.load(os.path.join('assets', 'images', 'katana.png')),
-            'kunai-for-character': pygame.image.load(os.path.join('assets', 'images', 'kunai-for-character.png')),
-            'kunai-ninja': pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png')),
-            'kunai': pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),
-            'madeira_left_100': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_100.png')),
-            'madeira_left_66': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_66.png')),
-            'madeira_left_33': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_33.png')),
-            'madeira_left_0': pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0.png')),
-            'madeira_right_100': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_100.png')),
-            'madeira_right_66': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_66.png')),
-            'madeira_right_33': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),
-            'madeira_right_0': pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),
-            'ninja-main': pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),
-            'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
-            'shuriken': pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),
-            'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png')),
+            'catapulta': pygame.image.load(os.path.join('src','assets', 'images', 'catapulta.png')),
+            'enemy1': pygame.image.load(os.path.join('src','assets', 'images', 'enemy1.png')),
+            'enemy2': pygame.image.load(os.path.join('src','assets', 'images', 'enemy2.png')),
+            'enemy3': pygame.image.load(os.path.join('src','assets', 'images', 'enemy3.png')),
+            'fundo': pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg')),
+            'katana-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png')),
+            'katana': pygame.image.load(os.path.join('src','assets', 'images', 'katana.png')),
+            'kunai-for-character': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-for-character.png')),
+            'kunai-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')),
+            'kunai': pygame.image.load(os.path.join('src','assets', 'images', 'kunai.png')),
+            'madeira_left_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_100.png')),
+            'madeira_left_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_66.png')),
+            'madeira_left_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_33.png')),
+            'madeira_left_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_0.png')),
+            'madeira_right_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_100.png')),
+            'madeira_right_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_66.png')),
+            'madeira_right_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_33.png')),
+            'madeira_right_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_0.png')),
+            'ninja-main': pygame.image.load(os.path.join('src','assets', 'images', 'ninja-main.png')),
+            'shuriken-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')),
+            'shuriken': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken.png')),
+            'spikeball': pygame.image.load(os.path.join('src','assets', 'images', 'spikeball.png')),
             # add all images from assets here
 
         }
@@ -48,6 +52,10 @@ class level:
                 'center': (0, 0),
             }
         }
+
+        #lançamento da arma
+        self.pos_mouse = np.array([0, 0])
+        
 
     def inicializa(self):
         return self.window, self.assets, self.state
@@ -84,15 +92,15 @@ class level:
             return True
         return False
     
-    def desenha_flecha(self, window, ponto, direcao):
+    def desenha_flecha(self, window, ponto, direcao, alcance):
     #desenhar a flecha de acordo com a formula da trajetória de um projétil
-        pygame.draw.line(window, (255, 255, 255), ponto, (ponto[0] + direcao[0]*100, ponto[1] + direcao[1]*100), 5)
+        pygame.draw.line(window, (255, 255, 255), ponto, (ponto[0] + alcance*math.cos(direcao), ponto[1] + alcance*math.sin(direcao)), 3)
         pygame.display.update()
 
 
-    def desenha_bola(self, window, assets, state):
+    def desenha_bola(self, window, x, y):
         # apenas desenha a bola pygame
-        bola = pygame.draw.circle(window, (255, 255, 255), (180, 500), 10)
+        bola = pygame.draw.circle(window, (255, 255, 255), (x, y), 10)
         pygame.display.update()
         return bola
     
@@ -115,39 +123,25 @@ class level:
             elif ev.type == pygame.MOUSEBUTTONDOWN:
                 if self.colisao_ponto_circulo(ev.pos[0], ev.pos[1], 230, 550, 70) and not state['atirou']: 
                     state['atirando'] = True
-                    while ev.type != pygame.MOUSEBUTTONUP:
-                        for ev in pygame.event.get():
-                            if ev.type == pygame.MOUSEMOTION:
-                                state['vetor'] = self.vector((238, 562), ev.pos)
-                                self.direcao = self.vector((238, 562), ev.pos)
-                                self.reblit(self.window, state)
-                                self.desenha_flecha(self.window, (238, 562), self.direcao)
-                                pygame.display.update()
-                        
-            elif ev.type == pygame.MOUSEBUTTONUP:
-                # se o mouse for solto, a bola é lançada
+                # enquanto o mouse estiver pressionado, a flecha é desenhada e atualizada a cada frame
                 if state['atirando']:
-                    print('soltou')
-                    state['atirando'] = False
-                    state['atirou'] = True
-                    for i in range(0, 100):
-                        self.desenha_bola(self.window, assets, state)
-                        state['bola']['center'] = (state['bola']['center'][0] + self.direcao[0]*i, state['bola']['center'][1] + self.direcao[1]*i)
-                        pygame.display.update()
-                        self.window.fill((0, 0, 0))
-                        self.clock.tick(60)
-                    state['atirou'] = False
+                    if self.distancia(ev.pos[0], ev.pos[1], 230, 550) <= 100:
+                        self.desenha_flecha(self.window, (230, 550), math.atan2(ev.pos[1]-550, ev.pos[0]-230), self.distancia(ev.pos[0], ev.pos[1], 230, 550))
 
-
-                   
-
-                    
-
-
-
-                
-
-
+            elif ev.type == pygame.MOUSEBUTTONUP:
+                pass
+                # # se o mouse for solto, a bola é lançada
+                # while state['atirando']:
+                #     # a bola começa em x=180, y=500
+                #     x = 180
+                #     y = 500
+                #     self.desenha_bola(self.window, x, y)
+                #     # até encostar na borda da tela
+                #     if x < 0 or x > 600 or y < 0 or y > 600:
+                #         state['atirando'] = False
+                #         state['atirou'] = True
+                #         self.reblit(self.window, state)
+                #         break
                 
         return True
 
