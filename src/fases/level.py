@@ -1,7 +1,6 @@
 import pygame
 import pymunk as pm
 import math
-import interface
 import os
 import numpy as np
 import weapons.ball as Ball
@@ -11,6 +10,8 @@ class level():
     def __init__(self, display, updates) -> None:
         pygame.init()
         pygame.mixer.init()
+        self.valida_lancamento = False
+        self.index_ball = 0
         self.window = display
         pygame.key.set_repeat(50)
         self.BLACK = (0, 0, 0)
@@ -55,24 +56,18 @@ class level():
             }
         }
         self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
-        
-        self.pos_mouse = np.array([0, 0])
-        ball = Ball.Ball(self.state['weapon'],self.level,self.pos_mouse, [1220,650])
-        print(ball.get_name())
-
-
-
-    def inicializa(self):
-        return self.window, self.assets, self.state
-
-    def desenha_tela(self):
-        self.window.fill((0, 0, 0))
-        self.window.blit(self.assets['fundo'], (0, 0))
+        self.pos_mouse = pygame.mouse.get_pos()
+        # self.balls = [Ball.Ball(self.state['weapon'],self.level,[50,50], [1220,650]) for i in range(self.state['ammo'])]
 
     def desenha(self,display): 
-
-        self.display = display
-        self.desenha_tela()
+        self.window = display
+        self.window.fill((0, 0, 0))
+        self.window.blit(self.assets['fundo'], (0, 0))
+        #Bolas
+        # for i in range(self.index_ball +1):
+        #     current_ball = self.balls[i]
+        #     current_ball.desenha(self.window)
+            
         self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
         if self.state['weapon'] == 'katana':
             self.window.blit(pygame.transform.scale(self.assets['katana'], (50, 80)), (237, 487))
@@ -81,6 +76,10 @@ class level():
         elif self.state['weapon'] == 'shuriken':
             self.window.blit(pygame.transform.scale(self.assets['shuriken'], (25, 25)), (237, 550))
         pygame.display.update()
+        
+        
+
+
 
     def distancia(self, x1, y1, x2, y2):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
@@ -99,18 +98,6 @@ class level():
             return True
         return False
 
-    def reblit(self,):
-        self.window.fill((0, 0, 0))
-        self.window.blit(self.assets['fundo'], (0, 0))
-        self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
-        if self.state['weapon'] == 'katana':
-            self.window.blit(pygame.transform.scale(self.assets['katana'], (50, 80)), (237, 487))
-        elif self.state['weapon'] == 'kunai':
-            self.window.blit(pygame.transform.scale(self.assets['kunai'], (50, 100)), (237, 510))
-        elif self.state['weapon'] == 'shuriken':
-            self.window.blit(pygame.transform.scale(self.assets['shuriken'], (25, 25)), (237, 550))
-
-
     def atualiza_estado(self):
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
@@ -119,13 +106,18 @@ class level():
                 pass
             elif ev.type == pygame.MOUSEBUTTONUP:
                 pass
-                
+
+        # #lançamento da bola
+        # self.valida_lancamento = self.balls[self.index_ball].lancamento(self.pos_mouse)
+        # #movimentação da bola
+        # self.balls[self.index_ball].movimentar_bola()
+        
+        
         return True
 
     def gameloop(self):
-        while self.atualiza_estado(self.assets,self.state):
-            self.desenha_tela(self.window,self.state)
-            self.desenha(self.window, self.assets, self.state)
+        while self.atualiza_estado():
+            self.desenha(self.window)
             pygame.display.update()
 
 
