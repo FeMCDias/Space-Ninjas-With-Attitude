@@ -3,11 +3,11 @@ from interface import *
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
-class Vitoria:
+class Derrota:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'chooseWeapon'
-        self.screen_name = 'home'
+        self.screen_name = 'derrota'
         self.display = display
         self.buttons = []
         self.buttons.append(Button(400, 450, 200, 100, None, (255, 0, 0), font, (0, 0, 0),30))
