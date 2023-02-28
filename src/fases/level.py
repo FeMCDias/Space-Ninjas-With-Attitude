@@ -27,30 +27,30 @@ class level():
             self.victory = False
             #Imagens
             self.assets = {
-                # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
-                'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),(113,150)),
-                'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),(113,150)),
-                'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),(113,150)),
-                'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
-                'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
-                'katana': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'katana.png')),(80,80)),
-                'kunai-for-character': pygame.image.load(os.path.join('assets', 'images', 'kunai-for-character.png')),
-                'kunai-ninja': pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png')),
-                'kunai': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),(60,60)),
-                'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_100.png')),(100, 200)),
-                'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_66.png')),(100, 200)),
-                'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_33.png')),(100, 200)),
-                'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0.png')),(100, 200)),
-                'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
-                'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_100.png')),(100, 200)),
-                'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_66.png')),(100, 200)),
-                'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),(100, 200)),
-                'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),(100, 200)),
-                'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
-                'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),(67,100)),
-                'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
-                'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(30,30)),
-                # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
+                # 'catapulta': pygame.image.load(os.path.join('src', 'assets', 'images', 'catapulta.png')),
+                'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'enemy1.png')),(113,150)),
+                'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'enemy2.png')),(113,150)),
+                'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'enemy3.png')),(113,150)),
+                'fundo': pygame.image.load(os.path.join('src', 'assets', 'images', 'space-ninja-temple.jpg')),
+                'katana-ninja': pygame.image.load(os.path.join('src', 'assets', 'images', 'katana-ninja.png')),
+                'katana': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'katana.png')),(80,80)),
+                'kunai-for-character': pygame.image.load(os.path.join('src', 'assets', 'images', 'kunai-for-character.png')),
+                'kunai-ninja': pygame.image.load(os.path.join('src', 'assets', 'images', 'kunai-ninja.png')),
+                'kunai': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'kunai.png')),(60,60)),
+                'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_100.png')),(100, 200)),
+                'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_66.png')),(100, 200)),
+                'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_33.png')),(100, 200)),
+                'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_0.png')),(100, 200)),
+                'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
+                'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_100.png')),(100, 200)),
+                'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_66.png')),(100, 200)),
+                'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_33.png')),(100, 200)),
+                'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_0.png')),(100, 200)),
+                'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
+                'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'ninja-main.png')),(67,100)),
+                'shuriken-ninja': pygame.image.load(os.path.join('src', 'assets', 'images', 'shuriken-ninja.png')),
+                'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'shuriken.png')),(30,30)),
+                # 'spikeball': pygame.image.load(os.path.join('src', 'assets', 'images', 'spikeball.png'))
             }
 
             
@@ -120,6 +120,7 @@ class level():
                     self.victory = True
                     self.level = 3
                 self.enemy.change_level(self.level)
+                self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
                 self.ball.posicao = self.posicao_inicial
                 self.ball.reset_ball()
                 self.ball.change_type(self.state['weapon'], self.level)
@@ -179,7 +180,8 @@ class level():
                  if self.ball.verifica_ammo():
                     self.ball.lancamento(pygame.mouse.get_pos())
         # Atualiza a posição da bola
-        self.ball.atualiza()
+        if self.ball.existe:
+            self.ball.atualiza()
         if self.ball.ammo <= 0:
             self.next_screen = 'derrota'
             return gerenciadorTelas.GerenciadorTelas(self.window).set_state(self.next_screen)

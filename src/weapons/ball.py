@@ -12,6 +12,7 @@ class Ball(Weapon.Weapon):
         self.status = 'NÃO LANÇADA'
         self.aceleracao = np.array([0, 0])
         self.qtd_lancamentos = 0
+        self.existe = True
 
     def desenha(self,window,assets):
         if self.get_name() == 'katana':
