@@ -9,7 +9,7 @@ class chooseWeapon:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join( 'assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'level'
-        self.screen_name='chooseWeapon'
+        self.screen_name = 'chooseWeapon'
         self.display = display
         self.buttons = []
         self.buttons.append(Button(100, 100, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))

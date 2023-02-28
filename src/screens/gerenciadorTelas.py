@@ -5,6 +5,7 @@ import screens.chooseWeapon as chooseWeapon
 import screens.home as home
 import screens.derrota as derrota
 import screens.vitoria as vitoria
+import screens.tuto as tuto
 import fases.level
 import os
 
@@ -21,6 +22,9 @@ class GerenciadorTelas():
         if self.current_screen_string == 'home' :
             self.current_screen = home.Home(self.display)
             self.previous_screen.append('home')
+        elif self.current_screen_string == 'tuto':
+            self.current_screen = tuto.Tuto(self.display)
+            self.previous_screen.append('tuto')
         elif (self.current_screen_string == 'chooseWeapon' and self.previous_screen[-1] != 'chooseWeapon') or self.restart:
             self.current_screen = chooseWeapon.chooseWeapon(self.display)
             self.previous_screen.append('chooseWeapon')
