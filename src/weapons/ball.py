@@ -10,17 +10,22 @@ class Ball(Weapon.Weapon):
         self.velocidade = np.array([0, 0])
         self.screen = pg.Surface(screen)
         self.status = 'NÃO LANÇADA'
-        self.aceleracao = np.array([0.5, 0.5])
+        self.aceleracao = np.array([0.8, 0.8])
         self.qtd_lancamentos = 0
-
 
     def desenha(self,window,assets):
         if self.get_name() == 'katana':
-            window.blit(pg.transform.scale(assets['katana'], (80, 80)), (self.posicao[0], self.posicao[1]))
+            self.width = 80
+            self.height = 80
+            window.blit(pg.transform.scale(assets['katana'], (self.width, self.height)), (self.posicao[0], self.posicao[1]))
         elif self.get_name() == 'kunai':
-            window.blit(pg.transform.scale(assets['kunai'], (60, 60)), (self.posicao[0], self.posicao[1]))
+            self.width = 60
+            self.height = 60
+            window.blit(pg.transform.scale(assets['kunai'], (self.width, self.height)), (self.posicao[0], self.posicao[1]))
         elif self.get_name() == 'shuriken':
-            window.blit(pg.transform.scale(assets['shuriken'], (30, 30)), (self.posicao[0], self.posicao[1]))
+            self.width = 30
+            self.height = 30
+            window.blit(pg.transform.scale(assets['shuriken'], (self.width, self.height)), (self.posicao[0], self.posicao[1]))
         return True
     
 
@@ -55,6 +60,9 @@ class Ball(Weapon.Weapon):
     
     def get_status(self):
         return self.status
+    
+    def set_status(self, status):
+        self.status = status
     
     def movimentar_bola(self):
         return self.posicao + 0.1 * self.velocidade
