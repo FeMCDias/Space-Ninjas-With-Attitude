@@ -32,6 +32,8 @@ class MadeiraSprite(pygame.sprite.Sprite):
                 self.image = 'madeira_left_33'
             elif life >= 0:
                 self.image = 'madeira_left_0'
+            elif life <= 0:
+                self.image = 'madeira_left_rotate'
         elif type == 'right':
             if life >= 100:
                 self.image = 'madeira_right_100'
@@ -39,8 +41,10 @@ class MadeiraSprite(pygame.sprite.Sprite):
                 self.image = 'madeira_right_66'
             elif life >= 33:
                 self.image = 'madeira_right_33'
-            elif life >= 0:
+            elif life > 0:
                 self.image = 'madeira_right_0'
+            elif life <= 0:
+                self.image = 'madeira_right_rotate'
 
     def set_life(self, life):
         self.vida = life
@@ -56,4 +60,4 @@ class MadeiraSprite(pygame.sprite.Sprite):
             window.blit(pygame.transform.scale(assets[self.image], (100, 200)), (self.x, self.y))
             pygame.draw.circle(window, (255, 0, 0), (self.x+50, self.y+100), self.raio, 1)
         else:
-            window.blit(pygame.transform.scale(pygame.transform.rotate(assets[self.image], 90), (200, 100)), (self.x, self.y+100))
+            window.blit(assets[self.image], (self.x, self.y+100))
