@@ -7,7 +7,7 @@ import os
 
 class chooseWeapon:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src',  'assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'level'
         self.screen_name='chooseWeapon'
         self.display = display
@@ -23,10 +23,10 @@ class chooseWeapon:
         self.clicked = False
 
     def desenha(self, display):
-        katana_ninja = pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png'))
-        shuriken_ninja = pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png'))
-        kunai_ninja = pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png'))
-        fundo = pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg'))
+        katana_ninja = pygame.image.load(os.path.join('src',  'assets', 'images', 'katana-ninja.png'))
+        shuriken_ninja = pygame.image.load(os.path.join('src',  'assets', 'images', 'shuriken-ninja.png'))
+        kunai_ninja = pygame.image.load(os.path.join('src',  'assets', 'images', 'kunai-ninja.png'))
+        fundo = pygame.image.load(os.path.join('src',  'assets', 'images', 'space-ninja-temple.jpg'))
         self.display.blit(fundo, (0, 0))
         self.display = display
         for button in self.buttons:

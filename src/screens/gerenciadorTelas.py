@@ -9,32 +9,33 @@ import fases.level
 import os
 
 class GerenciadorTelas():
-    def __init__(self, display,updates={}):
+    def __init__(self, display,updates={}, restart=False):
         self.display = display
         self.current_screen_string = 'home'
         self.updates = updates
         self.previous_screen = ['home']
+        self.restart = restart
     
 
     def atualiza(self):
         if self.current_screen_string == 'home' :
             self.current_screen = home.Home(self.display)
             self.previous_screen.append('home')
-        elif self.current_screen_string == 'chooseWeapon' and self.previous_screen[-1] != 'chooseWeapon':
+        elif (self.current_screen_string == 'chooseWeapon' and self.previous_screen[-1] != 'chooseWeapon') or self.restart:
             self.current_screen = chooseWeapon.chooseWeapon(self.display)
             self.previous_screen.append('chooseWeapon')
-        elif self.current_screen_string == 'level' and self.previous_screen[-1] != 'level':
+        elif (self.current_screen_string == 'level' and self.previous_screen[-1] != 'level') or self.restart:
             self.current_screen = fases.level.level(self.display, self.updates)
             self.previous_screen.append('level')
         elif self.current_screen_string == 'derrota' and self.previous_screen[-1] != 'derrota':
             pygame.mixer.music.stop()
-            pygame.mixer.music.load(os.path.join('assets', 'music', 'Beneath_the_Mask.mp3'))
+            pygame.mixer.music.load(os.path.join('src', 'assets', 'music', 'Beneath_the_Mask.mp3'))
             pygame.mixer.music.play(-1)
             self.current_screen = derrota.Derrota(self.display)
             self.previous_screen.append('derrota')
         elif self.current_screen_string == 'vitoria' and self.previous_screen[-1] != 'vitoria':
             pygame.mixer.music.stop()
-            pygame.mixer.music.load(os.path.join('assets', 'music', 'Beneath_the_Mask.mp3'))
+            pygame.mixer.music.load(os.path.join('src', 'assets', 'music', 'Beneath_the_Mask.mp3'))
             pygame.mixer.music.play(-1)
             self.current_screen = vitoria.Vitoria(self.display)
             self.previous_screen.append('vitoria')
