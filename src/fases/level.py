@@ -69,7 +69,7 @@ class level():
             elif self.state['weapon'] == 'shuriken':
                 self.posicao_inicial = np.array((237, 550))
             self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
-            self.madeiras_sprite = self.cria_sprites_e_madeiras(5)
+            self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
     
     def cria_sprites_e_madeiras(self, qtd_madeiras):
         madeiras_sprite = pygame.sprite.Group()
@@ -87,6 +87,15 @@ class level():
                 else:
                     self.ball.set_status("NÃO LANÇADA")
                     self.ball.posicao = self.posicao_inicial
+            if madeira.check_in_orbit(self.ball.posicao):
+                ball_to_madeira = madeira.get_center() - self.ball.posicao
+                ball_to_madeira = ball_to_madeira / np.linalg.norm(ball_to_madeira)
+                self.ball.posicao = self.ball.posicao - ball_to_madeira
+                
+    def checa_saiu_tela(self):
+        if self.ball.posicao[0] < 0 or self.ball.posicao[0] > 1280 or self.ball.posicao[1] < 0 or self.ball.posicao[1] > 720:
+            self.ball.set_status("NÃO LANÇADA")
+            self.ball.posicao = self.posicao_inicial
             
 
     def desenha(self,display): 
