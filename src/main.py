@@ -3,7 +3,7 @@ import pygame
 import screens.gerenciadorTelas
 import os
 
-def main():
+def main(): 
     pygame.init()
     width = 1220
     height = 650
