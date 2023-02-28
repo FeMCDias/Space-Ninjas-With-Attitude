@@ -16,8 +16,6 @@ class level():
         if level.__instance_count < level.__instance_count_max:
             level.__instance_count += 1
             pygame.mixer.init()
-            self.valida_lancamento = False
-            self.index_ball = 0
             self.window = display
             self.BLACK = (0, 0, 0)
             self.clock = pygame.time.Clock()
@@ -60,8 +58,6 @@ class level():
             }
 
             self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
-            self.pos_mouse = pygame.mouse.get_pos()
-            # self.balls = [Ball.Ball(self.state['weapon'],self.level,[50,50], [1220,650]) for i in range(self.state['ammo'])]
             if self.state['weapon'] == 'katana':
                 self.posicao_inicial = np.array((237, 487))
             elif self.state['weapon'] == 'kunai':
@@ -81,11 +77,13 @@ class level():
     def atualiza_sprites_e_madeiras(self, madeiras_sprite):
         for madeira in madeiras_sprite:
             if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x, madeira.y, 50, 100) and not madeira.morta:
+                print(self.FPS)
                 madeira.set_life(madeira.vida - self.ball.damage)
                 if madeira.vida <= 0:
                     madeira.morta = True
                 else:
-                    self.ball.set_status("NÃO LANÇADA")
+                    self.ball.reset_ball()
+                    # self.ball.set_status("NÃO LANÇADA")
                     self.ball.posicao = self.posicao_inicial
             
 
@@ -93,11 +91,6 @@ class level():
         self.window = display
         self.window.fill((0, 0, 0))
         self.window.blit(self.assets['fundo'], (0, 0))
-        #Bolas
-        # self.ball.desenha(self.window,color=(255,0,0))
-        # for i in range(self.index_ball +1):
-            # current_ball = self.balls[i]
-            # current_ball.desenha(self.window)
             
         self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
         if not self.ball.get_status():
@@ -108,10 +101,10 @@ class level():
             elif self.state['weapon'] == 'shuriken':
                 self.window.blit(pygame.transform.scale(self.assets['shuriken'], (30, 30)), (237, 550))
             
-        self.ball.desenha(self.window, self.assets)
         
         for sprite in self.madeiras_sprite:
             sprite.render(self.window, self.assets)
+        self.ball.desenha(self.window, self.assets)
         self.atualiza_sprites_e_madeiras(self.madeiras_sprite)
         
         pygame.display.update()
@@ -146,11 +139,6 @@ class level():
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return False
-            # elif ev.type == pygame.MOUSEBUTTONDOWN:
-                # if self.balls[self.index_ball].verifica_ammo():
-                #     self.balls[self.index_ball].lancamento(pygame.mouse.get_pos())
-                #     self.index_ball += 1
-                # pass
             elif ev.type == pygame.MOUSEBUTTONDOWN:
                  if self.ball.verifica_ammo():
                     self.ball.lancamento(pygame.mouse.get_pos())
