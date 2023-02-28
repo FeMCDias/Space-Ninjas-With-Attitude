@@ -5,6 +5,7 @@ import os
 import numpy as np
 import weapons.ball as Ball
 import weapons.weapon as Weapon
+import obstacles.madeira as Madeira
 
 class level():
     # limitar número de vezes que a classe pode ser instanciada
@@ -34,14 +35,14 @@ class level():
                 'kunai-for-character': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-for-character.png')),
                 'kunai-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')),
                 'kunai': pygame.image.load(os.path.join('src','assets', 'images', 'kunai.png')),
-                # 'madeira_left_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_100.png')),
-                # 'madeira_left_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_66.png')),
-                # 'madeira_left_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_33.png')),
-                # 'madeira_left_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_0.png')),
-                # 'madeira_right_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_100.png')),
-                # 'madeira_right_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_66.png')),
-                # 'madeira_right_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_33.png')),
-                # 'madeira_right_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_0.png')),
+                'madeira_left_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_100.png')),
+                'madeira_left_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_66.png')),
+                'madeira_left_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_33.png')),
+                'madeira_left_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_0.png')),
+                'madeira_right_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_100.png')),
+                'madeira_right_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_66.png')),
+                'madeira_right_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_33.png')),
+                'madeira_right_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_0.png')),
                 'ninja-main': pygame.image.load(os.path.join('src','assets', 'images', 'ninja-main.png')),
                 'shuriken-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')),
                 'shuriken': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken.png')),
@@ -68,7 +69,26 @@ class level():
             elif self.state['weapon'] == 'shuriken':
                 self.posicao_inicial = np.array((237, 550))
             self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
+            self.madeiras_sprite = self.cria_sprites_e_madeiras(5)
     
+    def cria_sprites_e_madeiras(self, qtd_madeiras):
+        madeiras_sprite = pygame.sprite.Group()
+        madeiras = [Madeira.MadeiraSprite('left', 500 + 300*i, 420, 100) for i in range(qtd_madeiras//2)] + [Madeira.MadeiraSprite('right', 600 + 300*i, 420, 100) for i in range(qtd_madeiras//2)]
+        for madeira in madeiras:
+            madeiras_sprite.add(madeira)
+        return madeiras_sprite
+    
+    def atualiza_sprites_e_madeiras(self, madeiras_sprite):
+        for madeira in madeiras_sprite:
+            if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x, madeira.y, 50, 100) and not madeira.morta:
+                madeira.set_life(madeira.vida - self.ball.damage)
+                if madeira.vida <= 0:
+                    madeira.morta = True
+                else:
+                    self.ball.set_status("NÃO LANÇADA")
+                    self.ball.posicao = self.posicao_inicial
+            
+
     def desenha(self,display): 
         self.window = display
         self.window.fill((0, 0, 0))
@@ -87,8 +107,13 @@ class level():
                 self.window.blit(pygame.transform.scale(self.assets['kunai'], (60, 60)), (237, 535))
             elif self.state['weapon'] == 'shuriken':
                 self.window.blit(pygame.transform.scale(self.assets['shuriken'], (30, 30)), (237, 550))
+            
         self.ball.desenha(self.window, self.assets)
-
+        
+        for sprite in self.madeiras_sprite:
+            sprite.render(self.window, self.assets)
+        self.atualiza_sprites_e_madeiras(self.madeiras_sprite)
+        
         pygame.display.update()
     
     def confere_vitoria_derrota(self):
@@ -111,10 +136,11 @@ class level():
         pygame.mixer.music.play()
         state['nome_musica_tocando'] = 'NOME DA MÚSICA'
 
-    def colisao_ponto_circulo(self, ponto_x, ponto_y, circulo_x, circulo_y, circulo_raio):
-        if math.sqrt((ponto_x-circulo_x)**2 + (ponto_y-circulo_y)**2) <= circulo_raio:
+    def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):
+        if x1 > x2 + w2 or x1 + w1 < x2 or y1 > y2 + h2 or y1 + h1 < y2:
+            return False
+        else:
             return True
-        return False
 
     def atualiza_estado(self):
         for ev in pygame.event.get():
