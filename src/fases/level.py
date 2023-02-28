@@ -116,11 +116,13 @@ class level():
             self.ball.ammo -= 1
             if self.enemy.health <= 0:
                 self.level += 1
+                if self.level == 4:
+                    self.victory = True
+                    self.level = 3
                 self.enemy.change_level(self.level)
                 self.ball.posicao = self.posicao_inicial
                 self.ball.reset_ball()
-                if self.level == 4:
-                    self.victory = True
+                self.ball.change_type(self.state['weapon'], self.level)
 
     def desenha(self,display): 
         self.window = display
