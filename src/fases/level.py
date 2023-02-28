@@ -69,7 +69,7 @@ class level():
     
     def cria_sprites_e_madeiras(self, qtd_madeiras):
         madeiras_sprite = pygame.sprite.Group()
-        madeiras = [Madeira.MadeiraSprite('left', 500 + 300*i, 420, 100) for i in range(qtd_madeiras//2)] + [Madeira.MadeiraSprite('right', 600 + 300*i, 420, 100) for i in range(qtd_madeiras//2)]
+        madeiras = [Madeira.MadeiraSprite('left', 450 + 400*i, 420, 100) for i in range(qtd_madeiras//2)] + [Madeira.MadeiraSprite('right', 650 + 400*i, 420, 100) for i in range(qtd_madeiras//2)]
         for madeira in madeiras:
             madeiras_sprite.add(madeira)
         return madeiras_sprite
@@ -77,22 +77,24 @@ class level():
     def atualiza_sprites_e_madeiras(self, madeiras_sprite):
         for madeira in madeiras_sprite:
             if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x, madeira.y, 50, 100) and not madeira.morta:
-                print(self.FPS)
                 madeira.set_life(madeira.vida - self.ball.damage)
                 if madeira.vida <= 0:
                     madeira.morta = True
                 else:
-                    self.ball.reset_ball()
                     # self.ball.set_status("NÃO LANÇADA")
                     self.ball.posicao = self.posicao_inicial
-            if madeira.check_in_orbit(self.ball.posicao):
+                    self.ball.reset_ball()
+            if madeira.check_in_orbit(self.ball.posicao) and not madeira.morta:
                 ball_to_madeira = madeira.get_center() - self.ball.posicao
                 ball_to_madeira = ball_to_madeira / np.linalg.norm(ball_to_madeira)
+                #change ball velocity according to the madeira
+                # self.ball.aceleracao = madeira.gravidade*0.01/ball_to_madeira**2 
+                # self.ball.velocidade = self.ball.velocidade + self.ball.aceleracao
                 self.ball.posicao = self.ball.posicao - ball_to_madeira
                 
     def checa_saiu_tela(self):
         if self.ball.posicao[0] < 0 or self.ball.posicao[0] > 1280 or self.ball.posicao[1] < 0 or self.ball.posicao[1] > 720:
-            self.ball.set_status("NÃO LANÇADA")
+            self.ball.reset_ball()
             self.ball.posicao = self.posicao_inicial
             
 
@@ -109,12 +111,12 @@ class level():
                 self.window.blit(pygame.transform.scale(self.assets['kunai'], (60, 60)), (237, 535))
             elif self.state['weapon'] == 'shuriken':
                 self.window.blit(pygame.transform.scale(self.assets['shuriken'], (30, 30)), (237, 550))
-            
         
         for sprite in self.madeiras_sprite:
             sprite.render(self.window, self.assets)
         self.ball.desenha(self.window, self.assets)
         self.atualiza_sprites_e_madeiras(self.madeiras_sprite)
+        self.checa_saiu_tela()
         
         pygame.display.update()
     

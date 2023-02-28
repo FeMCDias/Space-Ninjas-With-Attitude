@@ -46,7 +46,7 @@ class Ball(Weapon.Weapon):
             self.direcao = pos_mouse - self.posicao
             self.norm_vetor = self.modulo_vetor(self.direcao)
             self.aceleracao = self.direcao/self.norm_vetor
-            self.magnitude = 18
+            self.magnitude = 5
             self.velocidade = self.aceleracao * self.magnitude
             self.status = 'LANÇADA'
             self.qtd_lancamentos += 1
