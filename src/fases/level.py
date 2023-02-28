@@ -17,12 +17,13 @@ class level():
         self.window = display
         self.BLACK = (0, 0, 0)
         self.clock = pygame.time.Clock()
-        self.FPS = 60  # Frames per Second
+        self.FPS = 180  # Frames per Second
         self.level = 1
         self.victory = False
         #Imagens
         self.assets = {
             # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
+            'chop_wood': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'chop_wood.wav')),
             'cut_enemy_sound': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'cut_enemy.wav')),
             'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),(113,150)),
             'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),(113,150)),
@@ -83,6 +84,8 @@ class level():
         for madeira in madeiras_sprite:
             if not madeira.morta:
                 if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x+30, madeira.y, 70, 200):
+                    self.assets['chop_wood'].set_volume(0.3)
+                    self.assets['chop_wood'].play()
                     madeira.set_life(madeira.vida - self.ball.damage)
                     if madeira.vida <= 0:
                         madeira.morta = True

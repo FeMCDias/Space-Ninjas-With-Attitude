@@ -6,7 +6,7 @@ import os
 class Home:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join( 'assets', 'fonts', 'Karasha.ttf'), 50)
-        self.next_screen = 'chooseWeapon'
+        self.next_screen = 'tuto'
         self.screen_name = 'home'
         self.display = display
         self.buttons = []
