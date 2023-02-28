@@ -10,7 +10,7 @@ class Ball(Weapon.Weapon):
         self.velocidade = np.array([0, 0])
         self.screen = pg.Surface(screen)
         self.status = 'NÃO LANÇADA'
-        self.aceleracao = np.array([0.8, 0.8])
+        self.aceleracao = np.array([0, 0])
         self.qtd_lancamentos = 0
 
     def desenha(self,window,assets):
@@ -43,11 +43,11 @@ class Ball(Weapon.Weapon):
 
     def lancamento(self, pos_mouse):
         if self.status == 'NÃO LANÇADA':
-            direcao = np.array(pos_mouse) - self.posicao
-            norm_vetor = self.modulo_vetor(direcao)
-            aceleracao = direcao/norm_vetor
-            magnitude = 5
-            self.velocidade = aceleracao * magnitude
+            self.direcao = pos_mouse - self.posicao
+            self.norm_vetor = self.modulo_vetor(self.direcao)
+            self.aceleracao = self.direcao/self.norm_vetor
+            self.magnitude = 18
+            self.velocidade = self.aceleracao * self.magnitude
             self.status = 'LANÇADA'
             self.qtd_lancamentos += 1
         return True
@@ -63,8 +63,14 @@ class Ball(Weapon.Weapon):
     
     def set_status(self, status):
         self.status = status
+
+    def reset_ball(self):
+        self.velocidade = np.array([0, 0])
+        self.status = 'NÃO LANÇADA'
+        self.aceleracao = np.array([0, 0])
+        self.qtd_lancamentos = 0
+
     
     def movimentar_bola(self):
         return self.posicao + 0.1 * self.velocidade
 
-            
