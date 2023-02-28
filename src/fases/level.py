@@ -86,7 +86,15 @@ class level():
         self.ball.desenha(self.window)
 
         pygame.display.update()
-        
+    
+    def confere_vitoria_derrota(self):
+        pass
+    #     if self.state['vitoria']:
+    #         return 'vitoria'
+    #     elif self.state['derrota']:
+    #         return 'derrota'
+    #     else:
+    #         return None
     def distancia(self, x1, y1, x2, y2):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
