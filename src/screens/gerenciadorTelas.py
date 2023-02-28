@@ -29,13 +29,13 @@ class GerenciadorTelas():
             self.previous_screen.append('level')
         elif self.current_screen_string == 'derrota' and self.previous_screen[-1] != 'derrota':
             pygame.mixer.music.stop()
-            pygame.mixer.music.load(os.path.join('src', 'assets', 'music', 'Beneath_the_Mask.mp3'))
+            pygame.mixer.music.load(os.path.join('assets', 'music', 'Beneath_the_Mask.mp3'))
             pygame.mixer.music.play(-1)
             self.current_screen = derrota.Derrota(self.display)
             self.previous_screen.append('derrota')
         elif self.current_screen_string == 'vitoria' and self.previous_screen[-1] != 'vitoria':
             pygame.mixer.music.stop()
-            pygame.mixer.music.load(os.path.join('src', 'assets', 'music', 'Beneath_the_Mask.mp3'))
+            pygame.mixer.music.load(os.path.join('assets', 'music', 'Beneath_the_Mask.mp3'))
             pygame.mixer.music.play(-1)
             self.current_screen = vitoria.Vitoria(self.display)
             self.previous_screen.append('vitoria')
