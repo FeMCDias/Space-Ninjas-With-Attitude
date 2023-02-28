@@ -57,7 +57,7 @@ class level():
                     'center': (0, 0),
                 }
             }
-            self.posicao_inicial = np.array([50,50])
+            self.posicao_inicial = np.array([237,550])
             self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
             self.pos_mouse = pygame.mouse.get_pos()
             # self.balls = [Ball.Ball(self.state['weapon'],self.level,[50,50], [1220,650]) for i in range(self.state['ammo'])]

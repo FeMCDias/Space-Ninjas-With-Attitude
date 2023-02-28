@@ -15,7 +15,6 @@ class Ball(Weapon.Weapon):
 
 
     def desenha(self,window):
-        print(self.posicao)
         rect = pg.Rect(self.posicao, [20,20])
         pg.draw.rect(window, (255,255,255), rect)
         return True
@@ -23,6 +22,9 @@ class Ball(Weapon.Weapon):
 
     def modulo_vetor(self, vetor):
         return np.linalg.norm(vetor)
+    
+    # def unit_vector(self, vetor):
+    #     return vetor / np.linalg.norm(vetor)
     
     def verifica_ammo(self):
         self.qtd_max_lancamentos = super().get_ammo()
@@ -33,11 +35,9 @@ class Ball(Weapon.Weapon):
     def lancamento(self, pos_mouse):
         if self.status == 'NÃO LANÇADA':
             direcao = np.array(pos_mouse) - self.posicao
-            # self.distance = math.sqrt((pos_mouse[0] - self.posicao[0]) ** 2 + (pos_mouse[1] - self.posicao[1]) ** 2)
-            # self.direction = [(pos_mouse[0] - self.posicao[0]) / self.distance, (pos_mouse[1] - self.posicao[1]) / self.distance]
             norm_vetor = self.modulo_vetor(direcao)
             aceleracao = direcao/norm_vetor
-            magnitude = abs(direcao)
+            magnitude = 5
             self.velocidade = aceleracao * magnitude
             self.status = 'LANÇADA'
             self.qtd_lancamentos += 1
@@ -46,7 +46,6 @@ class Ball(Weapon.Weapon):
     def atualiza(self):
         if self.status == 'LANÇADA':
             self.posicao = self.movimentar_bola()
-            print(self.posicao)
         
         return self.posicao
     
