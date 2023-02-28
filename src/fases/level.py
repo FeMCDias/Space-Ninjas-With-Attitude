@@ -10,71 +10,66 @@ import obstacles.madeira as Madeira
 import screens.gerenciadorTelas as gerenciadorTelas
 
 class level():
-    # limitar número de vezes que a classe pode ser instanciada
-    __instance_count = 0
-    __instance_count_max = 1
 
     def __init__(self, display, updates) -> None:
         self.next_screen = 'derrota'
-        if level.__instance_count < level.__instance_count_max:
-            level.__instance_count += 1
-            pygame.mixer.init()
-            self.window = display
-            self.BLACK = (0, 0, 0)
-            self.clock = pygame.time.Clock()
-            self.FPS = 60  # Frames per Second
-            self.level = 1
-            self.victory = False
-            #Imagens
-            self.assets = {
-                # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
-                'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),(113,150)),
-                'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),(113,150)),
-                'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),(113,150)),
-                'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
-                'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
-                'katana': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'katana.png')),(80,80)),
-                'kunai-for-character': pygame.image.load(os.path.join('assets', 'images', 'kunai-for-character.png')),
-                'kunai-ninja': pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png')),
-                'kunai': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),(60,60)),
-                'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_100.png')),(100, 200)),
-                'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_66.png')),(100, 200)),
-                'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_33.png')),(100, 200)),
-                'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0.png')),(100, 200)),
-                'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
-                'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_100.png')),(100, 200)),
-                'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_66.png')),(100, 200)),
-                'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),(100, 200)),
-                'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),(100, 200)),
-                'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
-                'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),(67,100)),
-                'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
-                'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(30,30)),
-                # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
-                'The Rain Formerly Known as Purple': pygame.mixer.music.load(os.path.join('assets', 'music', 'The_Rain_Formerly_Known_as_Purple.mp3')),
+        pygame.mixer.init()
+        self.window = display
+        self.BLACK = (0, 0, 0)
+        self.clock = pygame.time.Clock()
+        self.FPS = 60  # Frames per Second
+        self.level = 1
+        self.victory = False
+        #Imagens
+        self.assets = {
+            # 'catapulta': pygame.image.load(os.path.join('src', 'assets', 'images', 'catapulta.png')),
+            'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'enemy1.png')),(113,150)),
+            'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'enemy2.png')),(113,150)),
+            'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'enemy3.png')),(113,150)),
+            'fundo': pygame.image.load(os.path.join('src', 'assets', 'images', 'space-ninja-temple.jpg')),
+            'katana-ninja': pygame.image.load(os.path.join('src', 'assets', 'images', 'katana-ninja.png')),
+            'katana': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'katana.png')),(80,80)),
+            'kunai-for-character': pygame.image.load(os.path.join('src', 'assets', 'images', 'kunai-for-character.png')),
+            'kunai-ninja': pygame.image.load(os.path.join('src', 'assets', 'images', 'kunai-ninja.png')),
+            'kunai': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'kunai.png')),(60,60)),
+            'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_100.png')),(100, 200)),
+            'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_66.png')),(100, 200)),
+            'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_33.png')),(100, 200)),
+            'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_0.png')),(100, 200)),
+            'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
+            'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_100.png')),(100, 200)),
+            'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_66.png')),(100, 200)),
+            'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_33.png')),(100, 200)),
+            'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_0.png')),(100, 200)),
+            'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
+            'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'ninja-main.png')),(67,100)),
+            'shuriken-ninja': pygame.image.load(os.path.join('src', 'assets', 'images', 'shuriken-ninja.png')),
+            'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('src', 'assets', 'images', 'shuriken.png')),(30,30)),
+            # 'spikeball': pygame.image.load(os.path.join('src', 'assets', 'images', 'spikeball.png'))
+            'The Rain Formerly Known as Purple': pygame.mixer.music.load(os.path.join('src', 'assets', 'music', 'The_Rain_Formerly_Known_as_Purple.mp3')),
+        }
+        pygame.mixer.music.stop()
+        self.roda_musica()
+        self.state = {
+            'atirando': False,
+            'atirou': False,
+            'quitou': False,
+            'bola':{
+                'center': (0, 0),
             }
-            pygame.mixer.music.stop()
-            self.roda_musica()
-            self.state = {
-                'atirando': False,
-                'atirou': False,
-                'quitou': False,
-                'bola':{
-                    'center': (0, 0),
-                }
-            }
+        }
 
-            self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
-            if self.state['weapon'] == 'katana':
-                self.posicao_inicial = np.array((237, 487))
-            elif self.state['weapon'] == 'kunai':
-                self.posicao_inicial = np.array((237, 535))
-            elif self.state['weapon'] == 'shuriken':
-                self.posicao_inicial = np.array((237, 550))
-            self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
-            self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
-            self.enemy = Enemy.Enemy(1, 1100, 500)
-    
+        self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
+        if self.state['weapon'] == 'katana':
+            self.posicao_inicial = np.array((237, 487))
+        elif self.state['weapon'] == 'kunai':
+            self.posicao_inicial = np.array((237, 535))
+        elif self.state['weapon'] == 'shuriken':
+            self.posicao_inicial = np.array((237, 550))
+        self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
+        self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
+        self.enemy = Enemy.Enemy(1, 1100, 500)
+
     def cria_sprites_e_madeiras(self, qtd_madeiras):
         madeiras_sprite = pygame.sprite.Group()
         madeiras = [Madeira.MadeiraSprite('left', 450 + 400*i, 420, 100) for i in range(qtd_madeiras//2)] + [Madeira.MadeiraSprite('right', 650 + 400*i, 420, 100) for i in range(qtd_madeiras//2)]
