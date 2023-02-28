@@ -14,9 +14,13 @@ class Ball(Weapon.Weapon):
         self.qtd_lancamentos = 0
 
 
-    def desenha(self,window):
-        rect = pg.Rect(self.posicao, [20,20])
-        pg.draw.rect(window, (255,255,255), rect)
+    def desenha(self,window,assets):
+        if self.get_name() == 'katana':
+            window.blit(pg.transform.scale(assets['katana'], (80, 80)), (self.posicao[0], self.posicao[1]))
+        elif self.get_name() == 'kunai':
+            window.blit(pg.transform.scale(assets['kunai'], (60, 60)), (self.posicao[0], self.posicao[1]))
+        elif self.get_name() == 'shuriken':
+            window.blit(pg.transform.scale(assets['shuriken'], (30, 30)), (self.posicao[0], self.posicao[1]))
         return True
     
 
@@ -48,6 +52,9 @@ class Ball(Weapon.Weapon):
             self.posicao = self.movimentar_bola()
         
         return self.posicao
+    
+    def get_status(self):
+        return self.status
     
     def movimentar_bola(self):
         return self.posicao + 0.1 * self.velocidade

@@ -57,10 +57,16 @@ class level():
                     'center': (0, 0),
                 }
             }
-            self.posicao_inicial = np.array([237,550])
+
             self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
             self.pos_mouse = pygame.mouse.get_pos()
             # self.balls = [Ball.Ball(self.state['weapon'],self.level,[50,50], [1220,650]) for i in range(self.state['ammo'])]
+            if self.state['weapon'] == 'katana':
+                self.posicao_inicial = np.array((237, 487))
+            elif self.state['weapon'] == 'kunai':
+                self.posicao_inicial = np.array((237, 535))
+            elif self.state['weapon'] == 'shuriken':
+                self.posicao_inicial = np.array((237, 550))
             self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
     
     def desenha(self,display): 
@@ -74,13 +80,14 @@ class level():
             # current_ball.desenha(self.window)
             
         self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
-        if self.state['weapon'] == 'katana':
-            self.window.blit(pygame.transform.scale(self.assets['katana'], (50, 80)), (237, 487))
-        elif self.state['weapon'] == 'kunai':
-            self.window.blit(pygame.transform.scale(self.assets['kunai'], (50, 100)), (237, 510))
-        elif self.state['weapon'] == 'shuriken':
-            self.window.blit(pygame.transform.scale(self.assets['shuriken'], (25, 25)), (237, 550))
-        self.ball.desenha(self.window)
+        if not self.ball.get_status():
+            if self.state['weapon'] == 'katana':
+                self.window.blit(pygame.transform.scale(self.assets['katana'], (80, 80)), (237, 487))
+            elif self.state['weapon'] == 'kunai':
+                self.window.blit(pygame.transform.scale(self.assets['kunai'], (60, 60)), (237, 535))
+            elif self.state['weapon'] == 'shuriken':
+                self.window.blit(pygame.transform.scale(self.assets['shuriken'], (30, 30)), (237, 550))
+        self.ball.desenha(self.window, self.assets)
 
         pygame.display.update()
     
