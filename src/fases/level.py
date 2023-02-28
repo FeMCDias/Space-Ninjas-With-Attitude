@@ -18,12 +18,9 @@ class level():
             self.valida_lancamento = False
             self.index_ball = 0
             self.window = display
-            pygame.key.set_repeat(50)
             self.BLACK = (0, 0, 0)
             self.clock = pygame.time.Clock()
             self.FPS = 60  # Frames per Second
-            self.space = pm.Space()
-            self.space.gravity = (0.0, -900.0)
             self.level = 1
             #Imagens
             self.assets = {
@@ -116,17 +113,17 @@ class level():
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 return False
-            elif ev.type == pygame.MOUSEBUTTONDOWN:
+            # elif ev.type == pygame.MOUSEBUTTONDOWN:
                 # if self.balls[self.index_ball].verifica_ammo():
                 #     self.balls[self.index_ball].lancamento(pygame.mouse.get_pos())
                 #     self.index_ball += 1
-                pass
-            elif ev.type == pygame.MOUSEBUTTONUP:
+                # pass
+            elif ev.type == pygame.MOUSEBUTTONDOWN:
                  if self.ball.verifica_ammo():
                     self.ball.lancamento(pygame.mouse.get_pos())
                     
-                # Atualiza a posição da bola
-                    self.ball.atualiza()    
+        # Atualiza a posição da bola
+        self.ball.atualiza()    
 
         return True
 

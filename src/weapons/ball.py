@@ -1,6 +1,7 @@
 import numpy as np
 import pygame as pg
 import weapons.weapon as Weapon
+import math
 
 class Ball(Weapon.Weapon):
     def __init__(self, nome, level, posicao, screen):
@@ -32,6 +33,8 @@ class Ball(Weapon.Weapon):
     def lancamento(self, pos_mouse):
         if self.status == 'NÃO LANÇADA':
             direcao = np.array(pos_mouse) - self.posicao
+            # self.distance = math.sqrt((pos_mouse[0] - self.posicao[0]) ** 2 + (pos_mouse[1] - self.posicao[1]) ** 2)
+            # self.direction = [(pos_mouse[0] - self.posicao[0]) / self.distance, (pos_mouse[1] - self.posicao[1]) / self.distance]
             norm_vetor = self.modulo_vetor(direcao)
             aceleracao = direcao/norm_vetor
             magnitude = abs(direcao)
@@ -48,6 +51,6 @@ class Ball(Weapon.Weapon):
         return self.posicao
     
     def movimentar_bola(self):
-        return self.posicao + 0.2 * self.velocidade
+        return self.posicao + 0.1 * self.velocidade
 
             
