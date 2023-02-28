@@ -51,9 +51,10 @@ class level():
                 'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
                 'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(30,30)),
                 # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
+                'The Rain Formerly Known as Purple': pygame.mixer.music.load(os.path.join('assets', 'music', 'The_Rain_Formerly_Known_as_Purple.mp3')),
             }
-
-            
+            pygame.mixer.music.stop()
+            self.roda_musica()
             self.state = {
                 'atirando': False,
                 'atirou': False,
@@ -155,14 +156,9 @@ class level():
     def distancia(self, x1, y1, x2, y2):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
-    # def roda_musica(self, porcentagem, assets, state):
-    #     state['relogio_musica'].tick()
-    #     pygame.mixer.music.stop()
-    #     pygame.mixer.music.unload()
-    #     pygame.mixer.music.load(assets['NOME DA MÚSICA'])
-    #     pygame.mixer.music.set_volume(0.9)
-    #     pygame.mixer.music.play()
-    #     state['nome_musica_tocando'] = 'NOME DA MÚSICA'
+    def roda_musica(self):
+        pygame.mixer.music.set_volume(0.9)
+        pygame.mixer.music.play(-1)
 
     def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):
         pygame.Rect(x1, y1, w1, h1)

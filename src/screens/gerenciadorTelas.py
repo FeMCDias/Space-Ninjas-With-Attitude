@@ -6,6 +6,7 @@ import screens.home as home
 import screens.derrota as derrota
 import screens.vitoria as vitoria
 import fases.level
+import os
 
 class GerenciadorTelas():
     def __init__(self, display,updates={}):
@@ -26,9 +27,15 @@ class GerenciadorTelas():
             self.current_screen = fases.level.level(self.display, self.updates)
             self.previous_screen.append('level')
         elif self.current_screen_string == 'derrota' and self.previous_screen[-1] != 'derrota':
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(os.path.join('assets', 'music', 'Beneath_the_Mask.mp3'))
+            pygame.mixer.music.play(-1)
             self.current_screen = derrota.Derrota(self.display)
             self.previous_screen.append('derrota')
         elif self.current_screen_string == 'vitoria' and self.previous_screen[-1] != 'vitoria':
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(os.path.join('assets', 'music', 'Beneath_the_Mask.mp3'))
+            pygame.mixer.music.play(-1)
             self.current_screen = vitoria.Vitoria(self.display)
             self.previous_screen.append('vitoria')
         return self.current_screen.atualiza_estado()

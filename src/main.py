@@ -8,6 +8,8 @@ def main():
     width = 1220
     height = 650
     icon = pygame.image.load(os.path.join('assets', 'images', 'icon.png'))
+    pygame.mixer.music.load(os.path.join('assets', 'music', 'Risk_of_Rain_2.mp3'))
+    pygame.mixer.music.play(-1)
     pygame.display.set_icon(icon)
     pygame.display.set_caption('Space Ninjas With Attitude')
     display = pygame.display.set_mode((width, height))
