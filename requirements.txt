@@ -1,0 +1,4 @@
+pygame==2.1.2
+numpy==1.23.4
+mpmath==1.2.1
+
