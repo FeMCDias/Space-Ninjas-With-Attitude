@@ -1,18 +1,19 @@
 class Enemy:
-    def __init__(self, level):
+    def __init__(self, level, x, y):
         self.level = level
+        self.x, self.y = x, y
         if level == 1:
             self.health = 100
             self.color = (0, 0, 255)
-            self.image = 'enemy1.png'
+            self.image = 'enemy1'
         elif level == 2:
             self.health = 200
             self.color = (0, 255, 0)
-            self.image = 'enemy2.png'
+            self.image = 'enemy2'
         elif level == 3:
             self.health = 300
             self.color = (255, 0, 0)
-            self.image = 'enemy3.png'
+            self.image = 'enemy3'
         else:
             raise Exception('Invalid enemy level')
         
@@ -21,14 +22,17 @@ class Enemy:
         if level == 1:
             self.health = 100
             self.color = (0, 0, 255)
-            self.image = 'enemy1.png'
+            self.image = 'enemy1'
         elif level == 2:
             self.health = 200
             self.color = (0, 255, 0)
-            self.image = 'enemy2.png'
+            self.image = 'enemy2'
         elif level == 3:
             self.health = 300
             self.color = (255, 0, 0)
-            self.image = 'enemy3.png'
+            self.image = 'enemy3'
         else:
             raise Exception('Invalid enemy level')
+    
+    def render(self, window, assets, x, y):
+        window.blit(assets[self.image], (x, y))

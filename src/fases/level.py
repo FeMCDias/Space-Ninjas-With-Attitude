@@ -5,6 +5,7 @@ import os
 import numpy as np
 import weapons.ball as Ball
 import weapons.weapon as Weapon
+import enemies.enemy as Enemy
 import obstacles.madeira as Madeira
 import screens.gerenciadorTelas as gerenciadorTelas
 
@@ -27,9 +28,9 @@ class level():
             #Imagens
             self.assets = {
                 # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
-                # 'enemy1': pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),
-                # 'enemy2': pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),
-                # 'enemy3': pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),
+                'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),(113,150)),
+                'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),(113,150)),
+                'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),(113,150)),
                 'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
                 'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
                 'katana': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'katana.png')),(80,80)),
@@ -46,9 +47,9 @@ class level():
                 'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),(100, 200)),
                 'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),(100, 200)),
                 'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
-                'ninja-main': pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),
+                'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),(67,100)),
                 'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
-                'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(60,60)),
+                'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(30,30)),
                 # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
             }
 
@@ -71,6 +72,7 @@ class level():
                 self.posicao_inicial = np.array((237, 550))
             self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
             self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
+            self.enemy = Enemy.Enemy(1, 1100, 500)
     
     def cria_sprites_e_madeiras(self, qtd_madeiras):
         madeiras_sprite = pygame.sprite.Group()
@@ -82,7 +84,7 @@ class level():
     def atualiza_sprites_e_madeiras(self, madeiras_sprite):
         for madeira in madeiras_sprite:
             if not madeira.morta:
-                if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x, madeira.y, 50, 100):
+                if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x+30, madeira.y, 70, 200):
                     madeira.set_life(madeira.vida - self.ball.damage)
                     if madeira.vida <= 0:
                         madeira.morta = True
@@ -105,13 +107,27 @@ class level():
             self.ball.ammo -= 1
             self.ball.posicao = self.posicao_inicial
             
+    def atualiza_inimigo_e_confere_vitoria(self):
+        self.enemy.render(self.window, self.assets, self.enemy.x, self.enemy.y)
+        if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, self.enemy.x, self.enemy.y, 100, 100):
+            self.enemy.health -= self.ball.damage
+            self.ball.reset_ball()
+            self.ball.posicao = self.posicao_inicial
+            self.ball.ammo -= 1
+            if self.enemy.health <= 0:
+                self.level += 1
+                self.enemy.change_level(self.level)
+                self.ball.posicao = self.posicao_inicial
+                self.ball.reset_ball()
+                if self.level == 4:
+                    self.victory = True
 
     def desenha(self,display): 
         self.window = display
         self.window.fill((0, 0, 0))
         self.window.blit(self.assets['fundo'], (0, 0))
             
-        self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
+        self.window.blit(self.assets['ninja-main'], (180, 500))
         if not self.ball.get_status():
             if self.state['weapon'] == 'katana':
                 self.window.blit(self.assets['katana'], (80, 80), (237, 487))
@@ -130,6 +146,7 @@ class level():
         self.ball.desenha(self.window, self.assets)
         self.atualiza_sprites_e_madeiras(self.madeiras_sprite)
         self.checa_saiu_tela()
+        self.atualiza_inimigo_e_confere_vitoria()
         
         pygame.display.update()
         
@@ -146,10 +163,11 @@ class level():
     #     state['nome_musica_tocando'] = 'NOME DA MÚSICA'
 
     def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):
-        if x1 > x2 + w2 or x1 + w1 < x2 or y1 > y2 + h2 or y1 + h1 < y2:
-            return False
-        else:
-            return True
+        pygame.Rect(x1, y1, w1, h1)
+        pygame.Rect(x2, y2, w2, h2)
+        return pygame.Rect.colliderect(pygame.Rect(x1, y1, w1, h1), pygame.Rect(x2, y2, w2, h2))
+        
+
 
     def atualiza_estado(self):
         for ev in pygame.event.get():

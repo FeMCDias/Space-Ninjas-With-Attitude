@@ -17,15 +17,15 @@ class Ball(Weapon.Weapon):
         if self.get_name() == 'katana':
             self.width = 80
             self.height = 80
-            window.blit(pg.transform.scale(assets['katana'], (self.width, self.height)), (self.posicao[0], self.posicao[1]))
+            window.blit(assets['katana'], (self.posicao[0], self.posicao[1]))
         elif self.get_name() == 'kunai':
             self.width = 60
             self.height = 60
-            window.blit(pg.transform.scale(assets['kunai'], (self.width, self.height)), (self.posicao[0], self.posicao[1]))
+            window.blit(assets['kunai'], (self.posicao[0], self.posicao[1]))
         elif self.get_name() == 'shuriken':
             self.width = 30
             self.height = 30
-            window.blit(pg.transform.scale(assets['shuriken'], (self.width, self.height)), (self.posicao[0], self.posicao[1]))
+            window.blit(assets['shuriken'], (self.posicao[0], self.posicao[1]))
         return True
     
 
