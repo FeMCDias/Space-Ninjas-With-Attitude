@@ -26,28 +26,30 @@ class level():
             self.victory = False
             #Imagens
             self.assets = {
-                # 'catapulta': pygame.image.load(os.path.join('src','assets', 'images', 'catapulta.png')),
-                # 'enemy1': pygame.image.load(os.path.join('src','assets', 'images', 'enemy1.png')),
-                # 'enemy2': pygame.image.load(os.path.join('src','assets', 'images', 'enemy2.png')),
-                # 'enemy3': pygame.image.load(os.path.join('src','assets', 'images', 'enemy3.png')),
-                'fundo': pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg')),
-                'katana-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png')),
-                'katana': pygame.image.load(os.path.join('src','assets', 'images', 'katana.png')),
-                'kunai-for-character': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-for-character.png')),
-                'kunai-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')),
-                'kunai': pygame.image.load(os.path.join('src','assets', 'images', 'kunai.png')),
-                'madeira_left_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_100.png')),
-                'madeira_left_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_66.png')),
-                'madeira_left_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_33.png')),
-                'madeira_left_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_0.png')),
-                'madeira_right_100': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_100.png')),
-                'madeira_right_66': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_66.png')),
-                'madeira_right_33': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_33.png')),
-                'madeira_right_0': pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_0.png')),
-                'ninja-main': pygame.image.load(os.path.join('src','assets', 'images', 'ninja-main.png')),
-                'shuriken-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')),
-                'shuriken': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken.png')),
-                # 'spikeball': pygame.image.load(os.path.join('src','assets', 'images', 'spikeball.png'))
+                # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
+                # 'enemy1': pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),
+                # 'enemy2': pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),
+                # 'enemy3': pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),
+                'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
+                'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
+                'katana': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'katana.png')),(80,80)),
+                'kunai-for-character': pygame.image.load(os.path.join('assets', 'images', 'kunai-for-character.png')),
+                'kunai-ninja': pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png')),
+                'kunai': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),(60,60)),
+                'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_100.png')),(100, 200)),
+                'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_66.png')),(100, 200)),
+                'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_33.png')),(100, 200)),
+                'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0.png')),(100, 200)),
+                'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
+                'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_100.png')),(100, 200)),
+                'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_66.png')),(100, 200)),
+                'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),(100, 200)),
+                'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),(100, 200)),
+                'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
+                'ninja-main': pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),
+                'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
+                'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(60,60)),
+                # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
             }
 
             
@@ -79,22 +81,23 @@ class level():
     
     def atualiza_sprites_e_madeiras(self, madeiras_sprite):
         for madeira in madeiras_sprite:
-            if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x, madeira.y, 50, 100) and not madeira.morta:
-                madeira.set_life(madeira.vida - self.ball.damage)
-                if madeira.vida <= 0:
-                    madeira.morta = True
-                else:
-                    # self.ball.set_status("NÃO LANÇADA")
-                    self.ball.posicao = self.posicao_inicial
-                    self.ball.ammo -= 1
-                    self.ball.reset_ball()
-            if madeira.check_in_orbit(self.ball.posicao) and not madeira.morta:
-                ball_to_madeira = madeira.get_center() - self.ball.posicao
-                ball_to_madeira = ball_to_madeira / np.linalg.norm(ball_to_madeira)
-                #change ball velocity according to the madeira
-                # self.ball.aceleracao = madeira.gravidade*0.01/ball_to_madeira**2 
-                # self.ball.velocidade = self.ball.velocidade + self.ball.aceleracao
-                # self.ball.posicao = self.ball.posicao - ball_to_madeira
+            if not madeira.morta:
+                if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, madeira.x, madeira.y, 50, 100):
+                    madeira.set_life(madeira.vida - self.ball.damage)
+                    if madeira.vida <= 0:
+                        madeira.morta = True
+                    else:
+                        # self.ball.set_status("NÃO LANÇADA")
+                        self.ball.posicao = self.posicao_inicial
+                        self.ball.ammo -= 1
+                        self.ball.reset_ball()
+                if madeira.check_in_orbit(self.ball.posicao):
+                    ball_to_madeira = madeira.get_center() - self.ball.posicao
+                    ball_to_madeira = ball_to_madeira / np.linalg.norm(ball_to_madeira)
+                    #change ball velocity according to the madeira
+                    # self.ball.aceleracao = madeira.gravidade*0.01/ball_to_madeira**2 
+                    # self.ball.velocidade = self.ball.velocidade + self.ball.aceleracao
+                    # self.ball.posicao = self.ball.posicao - ball_to_madeira
                 
     def checa_saiu_tela(self):
         if self.ball.posicao[0] < 0 or self.ball.posicao[0] > 1280 or self.ball.posicao[1] < 0 or self.ball.posicao[1] > 720:
@@ -111,11 +114,11 @@ class level():
         self.window.blit(pygame.transform.scale(self.assets['ninja-main'], (67, 100)), (180, 500))
         if not self.ball.get_status():
             if self.state['weapon'] == 'katana':
-                self.window.blit(pygame.transform.scale(self.assets['katana'], (80, 80)), (237, 487))
+                self.window.blit(self.assets['katana'], (80, 80), (237, 487))
             elif self.state['weapon'] == 'kunai':
-                self.window.blit(pygame.transform.scale(self.assets['kunai'], (60, 60)), (237, 535))
+                self.window.blit(self.assets['kunai'], (60, 60), (237, 535))
             elif self.state['weapon'] == 'shuriken':
-                self.window.blit(pygame.transform.scale(self.assets['shuriken'], (30, 30)), (237, 550))
+                self.window.blit(self.assets['shuriken'], (30, 30), (237, 550))
         
         # blit text with weapon count
         font = pygame.font.Font('freesansbold.ttf', 32)
@@ -133,14 +136,14 @@ class level():
     def distancia(self, x1, y1, x2, y2):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
-    def roda_musica(self, porcentagem, assets, state):
-        state['relogio_musica'].tick()
-        pygame.mixer.music.stop()
-        pygame.mixer.music.unload()
-        pygame.mixer.music.load(assets['NOME DA MÚSICA'])
-        pygame.mixer.music.set_volume(0.9)
-        pygame.mixer.music.play()
-        state['nome_musica_tocando'] = 'NOME DA MÚSICA'
+    # def roda_musica(self, porcentagem, assets, state):
+    #     state['relogio_musica'].tick()
+    #     pygame.mixer.music.stop()
+    #     pygame.mixer.music.unload()
+    #     pygame.mixer.music.load(assets['NOME DA MÚSICA'])
+    #     pygame.mixer.music.set_volume(0.9)
+    #     pygame.mixer.music.play()
+    #     state['nome_musica_tocando'] = 'NOME DA MÚSICA'
 
     def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):
         if x1 > x2 + w2 or x1 + w1 < x2 or y1 > y2 + h2 or y1 + h1 < y2:
