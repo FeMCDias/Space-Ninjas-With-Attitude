@@ -3,6 +3,8 @@
 import pygame
 import screens.chooseWeapon as chooseWeapon
 import screens.home as home
+import screens.derrota as derrota
+import screens.vitoria as vitoria
 import fases.level
 
 class GerenciadorTelas():
@@ -23,6 +25,12 @@ class GerenciadorTelas():
         elif self.current_screen_string == 'level' and self.previous_screen[-1] != 'level':
             self.current_screen = fases.level.level(self.display, self.updates)
             self.previous_screen.append('level')
+        elif self.current_screen_string == 'derrota' and self.previous_screen[-1] != 'derrota':
+            self.current_screen = derrota.Derrota(self.display)
+            self.previous_screen.append('derrota')
+        elif self.current_screen_string == 'vitoria' and self.previous_screen[-1] != 'vitoria':
+            self.current_screen = vitoria.Vitoria(self.display)
+            self.previous_screen.append('vitoria')
         return self.current_screen.atualiza_estado()
     
     def game_loop(self):
@@ -44,6 +52,12 @@ class GerenciadorTelas():
         elif self.current_screen_string == 'level' and self.previous_screen[-1] != 'level':
             self.current_screen = fases.level.level(self.display, self.updates)
             self.previous_screen.append('level')
+        elif self.current_screen_string == 'derrota' and self.previous_screen[-1] != 'derrota':
+            self.current_screen = derrota.Derrota(self.display)
+            self.previous_screen.append('derrota')
+        elif self.current_screen_string == 'vitoria' and self.previous_screen[-1] != 'vitoria':
+            self.current_screen = vitoria.Vitoria(self.display)
+            self.previous_screen.append('vitoria')
         self.current_screen.desenha(self.display)
 
 

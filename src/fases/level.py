@@ -6,6 +6,7 @@ import numpy as np
 import weapons.ball as Ball
 import weapons.weapon as Weapon
 import obstacles.madeira as Madeira
+import screens.gerenciadorTelas as gerenciadorTelas
 
 class level():
     # limitar número de vezes que a classe pode ser instanciada
@@ -13,6 +14,7 @@ class level():
     __instance_count_max = 1
 
     def __init__(self, display, updates) -> None:
+        self.next_screen = 'derrota'
         if level.__instance_count < level.__instance_count_max:
             level.__instance_count += 1
             pygame.mixer.init()
@@ -21,6 +23,7 @@ class level():
             self.clock = pygame.time.Clock()
             self.FPS = 60  # Frames per Second
             self.level = 1
+            self.victory = False
             #Imagens
             self.assets = {
                 # 'catapulta': pygame.image.load(os.path.join('src','assets', 'images', 'catapulta.png')),
@@ -83,6 +86,7 @@ class level():
                 else:
                     # self.ball.set_status("NÃO LANÇADA")
                     self.ball.posicao = self.posicao_inicial
+                    self.ball.ammo -= 1
                     self.ball.reset_ball()
             if madeira.check_in_orbit(self.ball.posicao) and not madeira.morta:
                 ball_to_madeira = madeira.get_center() - self.ball.posicao
@@ -90,11 +94,12 @@ class level():
                 #change ball velocity according to the madeira
                 # self.ball.aceleracao = madeira.gravidade*0.01/ball_to_madeira**2 
                 # self.ball.velocidade = self.ball.velocidade + self.ball.aceleracao
-                self.ball.posicao = self.ball.posicao - ball_to_madeira
+                # self.ball.posicao = self.ball.posicao - ball_to_madeira
                 
     def checa_saiu_tela(self):
         if self.ball.posicao[0] < 0 or self.ball.posicao[0] > 1280 or self.ball.posicao[1] < 0 or self.ball.posicao[1] > 720:
             self.ball.reset_ball()
+            self.ball.ammo -= 1
             self.ball.posicao = self.posicao_inicial
             
 
@@ -112,6 +117,11 @@ class level():
             elif self.state['weapon'] == 'shuriken':
                 self.window.blit(pygame.transform.scale(self.assets['shuriken'], (30, 30)), (237, 550))
         
+        # blit text with weapon count
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render("Shots left: " + str(self.ball.ammo), True, (255, 255, 255))
+        self.window.blit(text, (1000, 50))
+        
         for sprite in self.madeiras_sprite:
             sprite.render(self.window, self.assets)
         self.ball.desenha(self.window, self.assets)
@@ -119,15 +129,7 @@ class level():
         self.checa_saiu_tela()
         
         pygame.display.update()
-    
-    def confere_vitoria_derrota(self):
-        pass
-    #     if self.state['vitoria']:
-    #         return 'vitoria'
-    #     elif self.state['derrota']:
-    #         return 'derrota'
-    #     else:
-    #         return None
+        
     def distancia(self, x1, y1, x2, y2):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
@@ -153,9 +155,14 @@ class level():
             elif ev.type == pygame.MOUSEBUTTONDOWN:
                  if self.ball.verifica_ammo():
                     self.ball.lancamento(pygame.mouse.get_pos())
-                    
         # Atualiza a posição da bola
-        self.ball.atualiza()    
+        self.ball.atualiza()
+        if self.ball.ammo <= 0:
+            self.next_screen = 'derrota'
+            return gerenciadorTelas.GerenciadorTelas(self.window).set_state(self.next_screen)
+        elif self.victory:
+            self.next_screen = 'vitoria'
+            return gerenciadorTelas.GerenciadorTelas(self.window).set_state(self.next_screen)
 
         return True
 
