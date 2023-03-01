@@ -7,36 +7,45 @@ import os
 
 class chooseWeapon:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'level'
         self.screen_name = 'chooseWeapon'
         self.display = display
         self.buttons = []
-        self.buttons.append(Button(100, 100, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
+        self.buttons.append(Button(100, 50, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
         self.buttons[0].add_text('Katana')
-        self.buttons.append(Button(100, 300, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
+        self.buttons.append(Button(100, 250, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
         self.buttons[1].add_text('Shuriken')
-        self.buttons.append(Button(100, 500, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
+        self.buttons.append(Button(100, 450, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
         self.buttons[2].add_text('Kunai')
         self.state = {}
         self.level = 1
         self.clicked = False
         self.ninjas = {
-            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png')), (118, 110)),
-            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')), (76, 110)),
-            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')), (115, 90))}
-        self.fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
-
+            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'katana-ninja.png')), (118, 110)),
+            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'shuriken-ninja.png')), (76, 110)),
+            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'kunai-ninja.png')), (115, 90))}
+        self.fundo = pygame.image.load(os.path.join( 'assets', 'images', 'space-ninja-temple.jpg'))
+        self.font = pygame.font.SysFont('Bauhaus 93', 30)
     def desenha(self, display):
         self.display.blit(self.fundo, (0, 0))
         self.display = display
+
         for button in self.buttons:
             pygame.draw.rect(self.display, (255, 255, 255), (button.x-5, button.y-5, button.w+10, button.h+10), 5, border_radius=35)
             button.draw(self.display)
-        # scale during blit
-        self.display.blit(self.ninjas['katana_ninja'], (350, 95))
-        self.display.blit(self.ninjas['shuriken_ninja'], (350, 295))
-        self.display.blit(self.ninjas['kunai_ninja'], (350, 500))
+
+        self.display.blit(self.ninjas['katana_ninja'], (350, 45))
+        self.display.blit(self.ninjas['shuriken_ninja'], (350, 245))
+        self.display.blit(self.ninjas['kunai_ninja'], (350, 455))
+
+        self.display.blit(self.font.render('Damage: 75', True, (255, 255, 255)), (100, 170))
+        self.display.blit(self.font.render('Ammo: 2 + 2 p/ level', True, (255, 255, 255)), (100, 200)) 
+        self.display.blit(self.font.render('Damage: 40', True, (255, 255, 255)), (100, 370))
+        self.display.blit(self.font.render('Ammo: 4 + 3 p/ level', True, (255, 255, 255)), (100, 400))
+        self.display.blit(self.font.render('Damage: 66', True, (255, 255, 255)), (100, 570))
+        self.display.blit(self.font.render('Ammo: 3 + 2 p/ level', True, (255, 255, 255)), (100, 600))
+
         pygame.display.update()
 
     def atualiza_estado(self):

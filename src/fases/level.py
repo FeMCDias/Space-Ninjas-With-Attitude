@@ -19,35 +19,35 @@ class level():
         self.victory = False
         #Imagens
         self.assets = {
-            # 'catapulta': pygame.image.load(os.path.join('src','assets', 'images', 'catapulta.png')),
-            'chop_wood': pygame.mixer.Sound(os.path.join('src','assets', 'sounds', 'chop_wood.wav')),
-            'cut_enemy_sound': pygame.mixer.Sound(os.path.join('src','assets', 'sounds', 'cut_enemy.wav')),
-            'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy1.png')),(113,150)),
-            'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy2.png')),(113,150)),
-            'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy3.png')),(113,150)),
-            'fundo': pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg')),
-            'katana-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png')),
-            'katana': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'katana.png')),(80,80)),
-            'kunai-for-character': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-for-character.png')),
-            'kunai-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')),
-            'kunai': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'kunai.png')),(60,60)),
-            'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_100.png')),(100, 200)),
-            'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_66.png')),(100, 200)),
-            'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_33.png')),(100, 200)),
-            'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_0.png')),(100, 200)),
-            'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
-            'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_100.png')),(100, 200)),
-            'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_66.png')),(100, 200)),
-            'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_33.png')),(100, 200)),
-            'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_0.png')),(100, 200)),
-            'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
-            'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'ninja-main.png')),(67,100)),
-            'shuriken-ninja': pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')),
-            'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'shuriken.png')),(30,30)),
-            'slice_sound': pygame.mixer.Sound(os.path.join('src','assets', 'sounds', 'slice.wav')),
-            'space_ninja_cat': pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'space_ninja_cat.png')),(100,100)),
-            # 'spikeball': pygame.image.load(os.path.join('src','assets', 'images', 'spikeball.png'))
-            'The Rain Formerly Known as Purple': pygame.mixer.music.load(os.path.join('src','assets', 'music', 'The_Rain_Formerly_Known_as_Purple.mp3')),
+            # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
+            'chop_wood': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'chop_wood.wav')),
+            'cut_enemy_sound': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'cut_enemy.wav')),
+            'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),(113,150)),
+            'enemy2': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')),(113,150)),
+            'enemy3': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')),(113,150)),
+            'fundo': pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg')),
+            'katana-ninja': pygame.image.load(os.path.join('assets', 'images', 'katana-ninja.png')),
+            'katana': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'katana.png')),(80,80)),
+            'kunai-for-character': pygame.image.load(os.path.join('assets', 'images', 'kunai-for-character.png')),
+            'kunai-ninja': pygame.image.load(os.path.join('assets', 'images', 'kunai-ninja.png')),
+            'kunai': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'kunai.png')),(60,60)),
+            'madeira_left_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_100.png')),(100, 200)),
+            'madeira_left_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_66.png')),(100, 200)),
+            'madeira_left_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_33.png')),(100, 200)),
+            'madeira_left_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0.png')),(100, 200)),
+            'madeira_left_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_left_0_rotate.png')),(200, 100)),
+            'madeira_right_100': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_100.png')),(100, 200)),
+            'madeira_right_66': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_66.png')),(100, 200)),
+            'madeira_right_33': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_33.png')),(100, 200)),
+            'madeira_right_0': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0.png')),(100, 200)),
+            'madeira_right_rotate' : pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'madeira_right_0_rotate.png')),(200, 100)),
+            'ninja-main': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'ninja-main.png')),(67,100)),
+            'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
+            'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(30,30)),
+            'slice_sound': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'slice.wav')),
+            'space_ninja_cat': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'space_ninja_cat.png')),(100,100)),
+            # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
+            'The Rain Formerly Known as Purple': pygame.mixer.music.load(os.path.join('assets', 'music', 'The_Rain_Formerly_Known_as_Purple.mp3')),
         }
         pygame.mixer.music.stop()
         self.roda_musica()
@@ -61,13 +61,13 @@ class level():
         elif self.state['weapon'] == 'shuriken':
             self.posicao_inicial = np.array((237, 550))
         self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
-        self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
-        self.enemy = Enemy.Enemy(1, 1100, 500)
-        self.planeta = Planet.Planet(250,150,50,100, 100, self.assets['space_ninja_cat'])
+        self.madeiras_sprite = self.cria_sprites_e_madeiras()
+        self.enemy = Enemy.Enemy(self.level)
+        self.planetas = Planet.Planet.change_level(self.level, self.assets['space_ninja_cat'])
 
-    def cria_sprites_e_madeiras(self, qtd_madeiras):
+    def cria_sprites_e_madeiras(self):
         madeiras_sprite = pygame.sprite.Group()
-        madeiras = [Madeira.MadeiraSprite('left', 450 + 400*i, 420, 100) for i in range(qtd_madeiras//2)] + [Madeira.MadeiraSprite('right', 650 + 400*i, 420, 100) for i in range(qtd_madeiras//2)]
+        madeiras = Madeira.MadeiraSprite.change_level(self.level)
         for madeira in madeiras:
             madeiras_sprite.add(madeira)
         return madeiras_sprite
@@ -81,6 +81,8 @@ class level():
                     madeira.set_life(madeira.vida - self.ball.damage)
                     if madeira.vida <= 0:
                         madeira.morta = True
+                        if madeira.disaparece:
+                            madeiras_sprite.remove(madeira)
                     else:
                         self.ball.posicao = self.posicao_inicial
                         self.ball.ammo -= 1
@@ -94,7 +96,7 @@ class level():
             
     def atualiza_inimigo_e_confere_vitoria(self):
         self.enemy.render(self.window, self.assets, self.enemy.x, self.enemy.y)
-        if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, self.enemy.x, self.enemy.y, 100, 100):
+        if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, self.enemy.x, self.enemy.y, 113, 150):
             self.assets['cut_enemy_sound'].set_volume(0.25)
             self.assets['cut_enemy_sound'].play()
             self.enemy.health -= self.ball.damage
@@ -107,10 +109,11 @@ class level():
                     self.victory = True
                     self.level = 3
                 self.enemy.change_level(self.level)
-                self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
+                self.madeiras_sprite = self.cria_sprites_e_madeiras()
                 self.ball.posicao = self.posicao_inicial
                 self.ball.reset_ball()
                 self.ball.change_type(self.state['weapon'], self.level)
+                self.planetas = Planet.Planet.change_level(self.level, self.assets['space_ninja_cat'])
 
     def desenha(self,display): 
         self.window = display
@@ -127,7 +130,8 @@ class level():
                 self.window.blit(self.assets['shuriken'], (237, 550))
 
         #planetas
-        self.planeta.draw(self.window)
+        for planeta in self.planetas:
+            planeta.draw(self.window)
 
         font = pygame.font.Font('freesansbold.ttf', 32)
         text = font.render("Shots left: " + str(self.ball.ammo), True, (255, 255, 255))
@@ -140,9 +144,10 @@ class level():
         self.checa_saiu_tela()
         self.atualiza_inimigo_e_confere_vitoria()
         
-        self.ball.aceleracao, self.ball.velocidade = self.planeta.calcula_gravidade(self.ball.posicao, self.ball.aceleracao, self.ball.velocidade)
-        if self.planeta.colisao_bola(self.ball.posicao):
-            self.ball.aceleracao = self.ball.aceleracao + 0.0001
+        for planeta in self.planetas:
+            self.ball.aceleracao, self.ball.velocidade = planeta.calcula_gravidade(self.ball.posicao, self.ball.aceleracao, self.ball.velocidade, self.ball.height, self.ball.width, self.window)
+            if planeta.colisao_bola(self.ball.posicao):
+                self.ball.aceleracao = self.ball.aceleracao + 0.0001
             
         pygame.display.update()
         
@@ -150,7 +155,6 @@ class level():
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
     def roda_musica(self):
-        pygame.mixer.music.set_volume(0.9)
         pygame.mixer.music.play(-1)
 
     def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):

@@ -5,7 +5,7 @@ import os
 
 class Tuto:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'chooseWeapon'
         self.screen_name = 'tuto'
         self.display = display
@@ -15,14 +15,15 @@ class Tuto:
         self.buttons.append(Button(self.buttons[0].x + self.buttons[0].w + 150, self.buttons[0].y, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
         self.buttons[1].add_text('Quit')
         self.state = {}
-        self.fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
-        self.title_font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 100)
-        self.font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 40)
+        self.fundo = pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg'))
+        self.title_font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 100)
+        self.font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 40)
         self.enemies = {
-            'enemy1':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy1.png')), (113, 150)),
-            'enemy2':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy2.png')), (113, 150)),
-            'enemy3':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy3.png')), (113, 150))
+            'enemy1':pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')), (113, 150)),
+            'enemy2':pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')), (113, 150)),
+            'enemy3':pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')), (113, 150)),
                         }
+        self.spacecat = pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'space_ninja_cat.png')),(150,150))
 
     def desenha(self, display):
         self.display = display
@@ -44,8 +45,9 @@ class Tuto:
         self.display.blit(self.enemies['enemy2'], (self.display.get_width()/2 - text.get_width()/2 + 790, 250))
         self.display.blit(self.enemies['enemy3'], (self.display.get_width()/2 - text.get_width()/2 + 890, 250))
 
-        text = self.font.render('Planets will pull your weapon with gravity, be careful...', True, (255, 255, 255))
+        text = self.font.render('Ninja Space Cat will pull your weapon with gravity, be careful...', True, (255, 255, 255))
         self.display.blit(text, (self.display.get_width()/2 - text.get_width()/2, 400))
+        self.display.blit(self.spacecat, (self.display.get_width()/2 - text.get_width()/2, 465))
         pygame.display.update()
 
     def atualiza_estado(self):
