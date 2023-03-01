@@ -3,9 +3,9 @@ class Weapon:
         self.name = name
         if name == 'shuriken':
             self.weight = 0.5
-            self.damage = 50
+            self.damage = 40
             self.image = 'shuriken.png'
-            self.ammo = 4 + level * 2
+            self.ammo = 4 + level * 3
         elif name == 'katana':
             self.weight = 3
             self.damage = 75
@@ -25,7 +25,7 @@ class Weapon:
             self.weight = 0.5
             self.damage = 40
             self.image = 'shuriken.png'
-            self.ammo = 7 + level * 2
+            self.ammo = 7 + level * 3
         elif name == 'katana':
             self.weight = 3
             self.damage = 75

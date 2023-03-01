@@ -68,7 +68,13 @@ class MadeiraSprite(pygame.sprite.Sprite):
                     MadeiraSprite('right', 320, 100, True, 100),
                     MadeiraSprite('left', 320, -70, True, 100)]
         elif level == 3:
-            return [MadeiraSprite('left', 450, 420, False, 100)]
+            return [MadeiraSprite('right', 900, -100, True, 100),
+                    MadeiraSprite('left', 900, 70, True, 100),
+                    MadeiraSprite('right', 900, 250, True, 100),
+                    MadeiraSprite('left', 900, 430, False, 100),
+                    MadeiraSprite('right', 800, 430, False, 100),
+                    MadeiraSprite('left', 700, 430, False, 100),
+                    MadeiraSprite('right', 900, 600, True, 100)]
         else:
             raise Exception('Invalid enemy level')
     

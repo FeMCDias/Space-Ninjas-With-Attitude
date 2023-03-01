@@ -41,8 +41,8 @@ class chooseWeapon:
 
         self.display.blit(self.font.render('Damage: 75', True, (255, 255, 255)), (100, 170))
         self.display.blit(self.font.render('Ammo: 2 + 2 p/ level', True, (255, 255, 255)), (100, 200)) 
-        self.display.blit(self.font.render('Damage: 50', True, (255, 255, 255)), (100, 370))
-        self.display.blit(self.font.render('Ammo: 4 + 2 p/ level', True, (255, 255, 255)), (100, 400))
+        self.display.blit(self.font.render('Damage: 40', True, (255, 255, 255)), (100, 370))
+        self.display.blit(self.font.render('Ammo: 4 + 3 p/ level', True, (255, 255, 255)), (100, 400))
         self.display.blit(self.font.render('Damage: 66', True, (255, 255, 255)), (100, 570))
         self.display.blit(self.font.render('Ammo: 3 + 2 p/ level', True, (255, 255, 255)), (100, 600))
 
