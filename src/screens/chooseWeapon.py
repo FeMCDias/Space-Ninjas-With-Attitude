@@ -7,7 +7,7 @@ import os
 
 class chooseWeapon:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join( 'assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'level'
         self.screen_name = 'chooseWeapon'
         self.display = display
