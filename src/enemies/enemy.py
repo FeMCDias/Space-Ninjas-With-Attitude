@@ -42,7 +42,10 @@ class Enemy:
             raise Exception('Invalid enemy level')
     
     def render(self, window, assets, x, y):
+        #blit health as text on top
         window.blit(assets[self.image], (x, y))
         pygame.draw.rect(window, (255, 0, 0), (x, y-10, 100, 10))
         pygame.draw.rect(window, (0, 255, 0), (x, y-10, self.health/self.total_health*100, 10))
         pygame.draw.rect(window, (0, 0, 0), (x, y-10, 100, 10), 1)
+        health_text = pygame.font.SysFont('Bauhaus 93', 20).render(str(self.health), True, (0, 0, 0))
+        window.blit(health_text, (x+50-health_text.get_width()/2, y-15-health_text.get_height()/2))

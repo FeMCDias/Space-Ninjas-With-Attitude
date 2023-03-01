@@ -61,13 +61,13 @@ class level():
         elif self.state['weapon'] == 'shuriken':
             self.posicao_inicial = np.array((237, 550))
         self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
-        self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
+        self.madeiras_sprite = self.cria_sprites_e_madeiras()
         self.enemy = Enemy.Enemy(1, 1100, 500)
-        self.planeta = Planet.Planet(250,150,50,100, 100, self.assets['space_ninja_cat'])
+        self.planeta = Planet.Planet.change_level(self.level, self.assets['space_ninja_cat'])
 
-    def cria_sprites_e_madeiras(self, qtd_madeiras):
+    def cria_sprites_e_madeiras(self):
         madeiras_sprite = pygame.sprite.Group()
-        madeiras = [Madeira.MadeiraSprite('left', 450 + 400*i, 420, 100) for i in range(qtd_madeiras//2)] + [Madeira.MadeiraSprite('right', 650 + 400*i, 420, 100) for i in range(qtd_madeiras//2)]
+        madeiras = Madeira.MadeiraSprite.change_level(self.level)
         for madeira in madeiras:
             madeiras_sprite.add(madeira)
         return madeiras_sprite
@@ -140,7 +140,7 @@ class level():
         self.checa_saiu_tela()
         self.atualiza_inimigo_e_confere_vitoria()
         
-        self.ball.aceleracao, self.ball.velocidade = self.planeta.calcula_gravidade(self.ball.posicao, self.ball.aceleracao, self.ball.velocidade)
+        self.ball.aceleracao, self.ball.velocidade = self.planeta.calcula_gravidade(self.ball.posicao, self.ball.aceleracao, self.ball.velocidade, self.ball.height, self.ball.width, self.window)
         if self.planeta.colisao_bola(self.ball.posicao):
             self.ball.aceleracao = self.ball.aceleracao + 0.0001
             
@@ -150,7 +150,7 @@ class level():
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
     def roda_musica(self):
-        pygame.mixer.music.set_volume(0.9)
+        pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play(-1)
 
     def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):

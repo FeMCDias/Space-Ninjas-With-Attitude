@@ -30,7 +30,7 @@ class MadeiraSprite(pygame.sprite.Sprite):
                 self.image = 'madeira_left_66'
             elif life >= 33:
                 self.image = 'madeira_left_33'
-            elif life >= 0:
+            elif life > 0:
                 self.image = 'madeira_left_0'
             elif life <= 0:
                 self.image = 'madeira_left_rotate'
@@ -49,6 +49,16 @@ class MadeiraSprite(pygame.sprite.Sprite):
     def set_life(self, life):
         self.vida = life
         self.set_image(life, self.type)
+
+    def change_level(level):
+        if level == 1:
+            return [MadeiraSprite('left', 450, 420, 100), MadeiraSprite('right', 650, 420, 100), MadeiraSprite('left', 850, 420, 100)]
+        elif level == 2:
+            pass
+        elif level == 3:
+            pass
+        else:
+            raise Exception('Invalid enemy level')
     
     def render(self, window, assets):
         if not self.morta:
