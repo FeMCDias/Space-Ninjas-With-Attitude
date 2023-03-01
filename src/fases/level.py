@@ -15,7 +15,7 @@ class level():
     def __init__(self, display, updates) -> None:
         self.next_screen = 'derrota'
         self.window = display
-        self.level = 3
+        self.level = 1
         self.victory = False
         #Imagens
         self.assets = {

@@ -61,6 +61,7 @@ class MadeiraSprite(pygame.sprite.Sprite):
                     MadeiraSprite('right', 725, 420, False, 100),
                     MadeiraSprite('left', 800, 420, False, 100),
                     MadeiraSprite('right', 875, 420, False, 100),
+                    MadeiraSprite('left', 950, 360, True, 100),
                     MadeiraSprite('left', 950, 420, False, 100),
                     MadeiraSprite('right', 1025, 420, False, 100),
                     MadeiraSprite('left', 1100, 420, False, 100),
