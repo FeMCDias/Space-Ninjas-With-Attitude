@@ -6,6 +6,7 @@ import os
 def main(): 
     pygame.init()
     pygame.mixer.init()
+    pygame.mixer.music.set_volume(0.5)
     width = 1220
     height = 650
     icon = pygame.image.load(os.path.join('assets', 'images', 'icon.png'))

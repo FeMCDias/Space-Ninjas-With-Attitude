@@ -155,7 +155,6 @@ class level():
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
     def roda_musica(self):
-        pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play(-1)
 
     def colisao_quadrados(self, x1, y1, w1, h1, x2, y2, w2, h2):
