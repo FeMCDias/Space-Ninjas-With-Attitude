@@ -2,19 +2,20 @@ import pygame
 import math
 import numpy as np
 class Planet():
-    def __init__(self, x, y,raio, alcance,c):
+    def __init__(self, x, y,raio, alcance,c, image):
         self.x = x
         self.y = y
         self.pos = np.array([x, y]) # transforma a posição (x,y) em um array para facilitar os cálculos
         self.raio = raio
         self.alcance = alcance  
         self.c = c # constante gravitacional
+        self.image = image
 
     def draw_alcance(self, display):
         pygame.draw.circle(display, (255, 255, 255), (self.x, self.y), self.alcance, 1)
 
     def draw(self, display):
-        pygame.draw.circle(display, (255, 255, 255), (self.x, self.y), self.raio)
+        display.blit(self.image, (self.x-self.raio, self.y-self.raio))
         self.draw_alcance(display)
 
     def distancia_entre_pontos(self, pos1, pos2):
