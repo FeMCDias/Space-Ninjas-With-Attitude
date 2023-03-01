@@ -96,7 +96,7 @@ class level():
             
     def atualiza_inimigo_e_confere_vitoria(self):
         self.enemy.render(self.window, self.assets, self.enemy.x, self.enemy.y)
-        if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, self.enemy.x, self.enemy.y, 100, 100):
+        if self.colisao_quadrados(self.ball.posicao[0], self.ball.posicao[1],self.ball.width, self.ball.height, self.enemy.x, self.enemy.y, 113, 150):
             self.assets['cut_enemy_sound'].set_volume(0.25)
             self.assets['cut_enemy_sound'].play()
             self.enemy.health -= self.ball.damage
