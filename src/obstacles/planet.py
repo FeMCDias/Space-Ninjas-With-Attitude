@@ -1,4 +1,42 @@
-
-
+import pygame
+import math
+import numpy as np
 class Planet():
-    pass
+    def __init__(self, x, y,raio, alcance,c):
+        self.x = x
+        self.y = y
+        self.pos = np.array([x, y]) # transforma a posição (x,y) em um array para facilitar os cálculos
+        self.raio = raio
+        self.alcance = alcance  
+        self.c = c # constante gravitacional
+
+    def draw_alcance(self, display):
+        pygame.draw.circle(display, (255, 255, 255), (self.x, self.y), self.alcance, 1)
+
+    def draw(self, display):
+        pygame.draw.circle(display, (255, 255, 255), (self.x, self.y), self.raio)
+        self.draw_alcance(display)
+
+    def distancia_entre_pontos(self, pos1, pos2):
+        return math.sqrt((pos1[0] - pos2[0]) ** 2 + (pos1[1] - pos2[1]) ** 2)
+    
+    def calcula_gravidade(self,pos_bola, bola_aceleracao, bola_velocidade):
+        distancia_pontos = self.distancia_entre_pontos(self.pos, pos_bola)
+        if distancia_pontos <= self.alcance:
+            direcao = self.pos - pos_bola # vetor direção da bola em relação ao planeta
+
+            modulo_vetor = np.linalg.norm(direcao) # módulo do vetor direção, ou seja, a distância entre os dois pontos
+            vetor_aceleracao = direcao/ modulo_vetor # vetor com a mesma direção do vetor da direção, porém com módulo 1
+
+            mag_a = self.c / modulo_vetor ** 2 # força gravitacional entre os dois corpos (planeta e bola)
+
+            bola_aceleracao = vetor_aceleracao * mag_a # vetor aceleração da bola
+            bola_velocidade = bola_velocidade + bola_aceleracao # velocidade da bola
+
+        return bola_aceleracao, bola_velocidade
+    
+
+    # Checa se houve colisão entre a bola e o planeta
+    def colisao_bola(self, pos_bola):
+          return True if self.distancia_entre_pontos(self.pos, pos_bola) <= self.raio + 200 else False
+    

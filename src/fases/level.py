@@ -8,6 +8,7 @@ import weapons.weapon as Weapon
 import enemies.enemy as Enemy
 import obstacles.madeira as Madeira
 import screens.gerenciadorTelas as gerenciadorTelas
+import obstacles.planet as Planet
 
 class level():
 
@@ -72,6 +73,13 @@ class level():
         self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
         self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
         self.enemy = Enemy.Enemy(1, 1100, 500)
+        self.planeta = Planet.Planet(250,150,50,100, 100)
+
+    def isinalcance(self, x,y):
+        #verifica se a bola está dentro do alcance do planeta
+        if (x-self.planeta.x)**2 + (y-self.planeta.y)**2 <= self.planeta.raio**2:
+            return True
+        return False
 
     def cria_sprites_e_madeiras(self, qtd_madeiras):
         madeiras_sprite = pygame.sprite.Group()
@@ -141,8 +149,10 @@ class level():
                 self.window.blit(self.assets['kunai'], (60, 60), (237, 535))
             elif self.state['weapon'] == 'shuriken':
                 self.window.blit(self.assets['shuriken'], (30, 30), (237, 550))
-        
-        # blit text with weapon count
+
+        #planetas
+        self.planeta.draw(self.window)
+
         font = pygame.font.Font('freesansbold.ttf', 32)
         text = font.render("Shots left: " + str(self.ball.ammo), True, (255, 255, 255))
         self.window.blit(text, (1000, 50))
@@ -154,6 +164,10 @@ class level():
         self.checa_saiu_tela()
         self.atualiza_inimigo_e_confere_vitoria()
         
+        self.ball.aceleracao, self.ball.velocidade = self.planeta.calcula_gravidade(self.ball.posicao, self.ball.aceleracao, self.ball.velocidade)
+        if self.planeta.colisao_bola(self.ball.posicao):
+            self.ball.aceleracao = self.ball.aceleracao + 0.0001
+            
         pygame.display.update()
         
     def distancia(self, x1, y1, x2, y2):
@@ -167,9 +181,7 @@ class level():
         pygame.Rect(x1, y1, w1, h1)
         pygame.Rect(x2, y2, w2, h2)
         return pygame.Rect.colliderect(pygame.Rect(x1, y1, w1, h1), pygame.Rect(x2, y2, w2, h2))
-        
-
-
+    
     def atualiza_estado(self):
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
@@ -183,13 +195,13 @@ class level():
         # Atualiza a posição da bola
         if self.ball.existe:
             self.ball.atualiza()
+            print(self.isinalcance(self.ball.posicao[0], self.ball.posicao[1]))
         if self.ball.ammo <= 0:
             self.next_screen = 'derrota'
             return gerenciadorTelas.GerenciadorTelas(self.window).set_state(self.next_screen)
         elif self.victory:
             self.next_screen = 'vitoria'
             return gerenciadorTelas.GerenciadorTelas(self.window).set_state(self.next_screen)
-
         return True
 
     def gameloop(self):

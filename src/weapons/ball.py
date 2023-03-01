@@ -71,6 +71,9 @@ class Ball(Weapon.Weapon):
         self.aceleracao = np.array([0, 0])
         self.qtd_lancamentos = 0
 
+    def set_aceleracao(self, aceleracao):
+        self.aceleracao = aceleracao
+
     
     def movimentar_bola(self):
         return self.posicao + 0.1 * self.velocidade
