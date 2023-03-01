@@ -40,11 +40,11 @@ class Planet():
     
     def change_level(level, image):
         if level == 1:
-            return Planet(500,250,50,100, 100, image)
+            return [Planet(500,250,50,100, 100, image)]
         elif level == 2:
-            pass
+            return [Planet(550,500,50,100, 100, image), Planet(550,250,50,100, 100, image)]
         elif level == 3:
-            pass
+            return [Planet(500,450,50,100, 100, image), Planet(400,350,50,100, 100, image), Planet(600,350,50,100, 100, image),]
         else:
             pass
 

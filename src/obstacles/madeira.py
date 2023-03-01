@@ -3,22 +3,22 @@ import numpy as np
 
 
 class MadeiraSprite(pygame.sprite.Sprite):
-    def __init__(self, type, x, y, vida=100, gravidade=0.5):
+    def __init__(self, type, x, y, disaparece, vida=100,):
         super().__init__()
         self.type = type
         self.x = x
         self.y = y
         self.vida = vida
         self.image = None
-        self.gravidade = gravidade
         self.raio = 200
         self.morta = False
+        self.disaparece = disaparece
         
         if type == 'left':
             self.image = 'madeira_left_100'
         elif type == 'right':
             self.image = 'madeira_right_100'
-            
+        
     def get_center(self):
         return np.array([self.x+50, self.y+100])
 
@@ -52,11 +52,23 @@ class MadeiraSprite(pygame.sprite.Sprite):
 
     def change_level(level):
         if level == 1:
-            return [MadeiraSprite('left', 450, 420, 100), MadeiraSprite('right', 650, 420, 100), MadeiraSprite('left', 850, 420, 100)]
+            return [MadeiraSprite('left', 450, 420, False, 100),
+                    MadeiraSprite('right', 650, 420, False, 100),
+                    MadeiraSprite('left', 850, 420, False, 100)]
         elif level == 2:
-            pass
+            return [MadeiraSprite('left', 320, 270, True, 100),
+                    MadeiraSprite('right', 650, 420, False, 100),
+                    MadeiraSprite('right', 725, 420, False, 100),
+                    MadeiraSprite('left', 800, 420, False, 100),
+                    MadeiraSprite('right', 875, 420, False, 100),
+                    MadeiraSprite('left', 950, 420, False, 100),
+                    MadeiraSprite('right', 1025, 420, False, 100),
+                    MadeiraSprite('left', 1100, 420, False, 100),
+                    MadeiraSprite('right', 1175, 420, False, 100),
+                    MadeiraSprite('right', 320, 100, True, 100),
+                    MadeiraSprite('left', 320, -70, True, 100)]
         elif level == 3:
-            pass
+            return [MadeiraSprite('left', 450, 420, False, 100)]
         else:
             raise Exception('Invalid enemy level')
     
