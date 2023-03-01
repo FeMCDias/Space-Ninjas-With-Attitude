@@ -7,7 +7,7 @@ import os
 
 class chooseWeapon:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join( 'assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'level'
         self.screen_name = 'chooseWeapon'
         self.display = display
@@ -22,10 +22,10 @@ class chooseWeapon:
         self.level = 1
         self.clicked = False
         self.ninjas = {
-            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'katana-ninja.png')), (118, 110)),
-            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'shuriken-ninja.png')), (76, 110)),
-            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'kunai-ninja.png')), (115, 90))}
-        self.fundo = pygame.image.load(os.path.join( 'assets', 'images', 'space-ninja-temple.jpg'))
+            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png')), (118, 110)),
+            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')), (76, 110)),
+            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')), (115, 90))}
+        self.fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
 
     def desenha(self, display):
         self.display.blit(self.fundo, (0, 0))
