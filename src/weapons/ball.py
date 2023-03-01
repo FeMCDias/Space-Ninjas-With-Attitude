@@ -1,8 +1,6 @@
 import numpy as np
 import pygame as pg
 import weapons.weapon as Weapon
-import math
-
 class Ball(Weapon.Weapon):
     def __init__(self, nome, level, posicao, screen):
         super().__init__(nome, level)
@@ -32,9 +30,6 @@ class Ball(Weapon.Weapon):
 
     def modulo_vetor(self, vetor):
         return np.linalg.norm(vetor)
-    
-    # def unit_vector(self, vetor):
-    #     return vetor / np.linalg.norm(vetor)
     
     def verifica_ammo(self):
         self.qtd_max_lancamentos = super().get_ammo()
