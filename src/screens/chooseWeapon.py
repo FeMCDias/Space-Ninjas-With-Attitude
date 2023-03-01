@@ -21,24 +21,22 @@ class chooseWeapon:
         self.state = {}
         self.level = 1
         self.clicked = False
+        self.ninjas = {
+            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'katana-ninja.png')), (118, 110)),
+            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'shuriken-ninja.png')), (76, 110)),
+            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'kunai-ninja.png')), (115, 90))}
+        self.fundo = pygame.image.load(os.path.join( 'assets', 'images', 'space-ninja-temple.jpg'))
 
     def desenha(self, display):
-        katana_ninja = pygame.image.load(os.path.join( 'assets', 'images', 'katana-ninja.png'))
-        shuriken_ninja = pygame.image.load(os.path.join( 'assets', 'images', 'shuriken-ninja.png'))
-        kunai_ninja = pygame.image.load(os.path.join( 'assets', 'images', 'kunai-ninja.png'))
-        fundo = pygame.image.load(os.path.join( 'assets', 'images', 'space-ninja-temple.jpg'))
-        self.display.blit(fundo, (0, 0))
+        self.display.blit(self.fundo, (0, 0))
         self.display = display
         for button in self.buttons:
             pygame.draw.rect(self.display, (255, 255, 255), (button.x-5, button.y-5, button.w+10, button.h+10), 5, border_radius=35)
             button.draw(self.display)
         # scale during blit
-        katana_ninja = pygame.transform.scale(katana_ninja, (118, 110))
-        shuriken_ninja = pygame.transform.scale(shuriken_ninja, (76, 110))
-        kunai_ninja = pygame.transform.scale(kunai_ninja, (115, 90))
-        self.display.blit(katana_ninja, (350, 95))
-        self.display.blit(shuriken_ninja, (350, 295))
-        self.display.blit(kunai_ninja, (350, 500))
+        self.display.blit(self.ninjas['katana_ninja'], (350, 95))
+        self.display.blit(self.ninjas['shuriken_ninja'], (350, 295))
+        self.display.blit(self.ninjas['kunai_ninja'], (350, 500))
         pygame.display.update()
 
     def atualiza_estado(self):

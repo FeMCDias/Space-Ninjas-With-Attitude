@@ -14,11 +14,7 @@ class level():
 
     def __init__(self, display, updates) -> None:
         self.next_screen = 'derrota'
-        pygame.mixer.init()
         self.window = display
-        self.BLACK = (0, 0, 0)
-        self.clock = pygame.time.Clock()
-        self.FPS = 180  # Frames per Second
         self.level = 1
         self.victory = False
         #Imagens
@@ -49,19 +45,13 @@ class level():
             'shuriken-ninja': pygame.image.load(os.path.join('assets', 'images', 'shuriken-ninja.png')),
             'shuriken': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'shuriken.png')),(30,30)),
             'slice_sound': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'slice.wav')),
+            'space_ninja_cat': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'space_ninja_cat.png')),(100,100)),
             # 'spikeball': pygame.image.load(os.path.join('assets', 'images', 'spikeball.png'))
             'The Rain Formerly Known as Purple': pygame.mixer.music.load(os.path.join('assets', 'music', 'The_Rain_Formerly_Known_as_Purple.mp3')),
         }
         pygame.mixer.music.stop()
         self.roda_musica()
-        self.state = {
-            'atirando': False,
-            'atirou': False,
-            'quitou': False,
-            'bola':{
-                'center': (0, 0),
-            }
-        }
+        self.state = {}
 
         self.state.update(updates) #Atualiza o dicionário de estados com as informações passadas da tela anterior (chooseWeapon)    
         if self.state['weapon'] == 'katana':
@@ -73,13 +63,7 @@ class level():
         self.ball = Ball.Ball(self.state['weapon'],self.level,self.posicao_inicial, [1220,650])
         self.madeiras_sprite = self.cria_sprites_e_madeiras(2)
         self.enemy = Enemy.Enemy(1, 1100, 500)
-        self.planeta = Planet.Planet(250,150,50,100, 100)
-
-    def isinalcance(self, x,y):
-        #verifica se a bola está dentro do alcance do planeta
-        if (x-self.planeta.x)**2 + (y-self.planeta.y)**2 <= self.planeta.raio**2:
-            return True
-        return False
+        self.planeta = Planet.Planet(250,150,50,100, 100, self.assets['space_ninja_cat'])
 
     def cria_sprites_e_madeiras(self, qtd_madeiras):
         madeiras_sprite = pygame.sprite.Group()
@@ -98,17 +82,9 @@ class level():
                     if madeira.vida <= 0:
                         madeira.morta = True
                     else:
-                        # self.ball.set_status("NÃO LANÇADA")
                         self.ball.posicao = self.posicao_inicial
                         self.ball.ammo -= 1
                         self.ball.reset_ball()
-                if madeira.check_in_orbit(self.ball.posicao):
-                    ball_to_madeira = madeira.get_center() - self.ball.posicao
-                    ball_to_madeira = ball_to_madeira / np.linalg.norm(ball_to_madeira)
-                    #change ball velocity according to the madeira
-                    # self.ball.aceleracao = madeira.gravidade*0.01/ball_to_madeira**2 
-                    # self.ball.velocidade = self.ball.velocidade + self.ball.aceleracao
-                    # self.ball.posicao = self.ball.posicao - ball_to_madeira
                 
     def checa_saiu_tela(self):
         if self.ball.posicao[0] < 0 or self.ball.posicao[0] > 1280 or self.ball.posicao[1] < 0 or self.ball.posicao[1] > 720:
@@ -144,11 +120,11 @@ class level():
         self.window.blit(self.assets['ninja-main'], (180, 500))
         if not self.ball.get_status():
             if self.state['weapon'] == 'katana':
-                self.window.blit(self.assets['katana'], (80, 80), (237, 487))
+                self.window.blit(self.assets['katana'], (237, 487))
             elif self.state['weapon'] == 'kunai':
-                self.window.blit(self.assets['kunai'], (60, 60), (237, 535))
+                self.window.blit(self.assets['kunai'], (237, 535))
             elif self.state['weapon'] == 'shuriken':
-                self.window.blit(self.assets['shuriken'], (30, 30), (237, 550))
+                self.window.blit(self.assets['shuriken'], (237, 550))
 
         #planetas
         self.planeta.draw(self.window)
@@ -187,15 +163,14 @@ class level():
             if ev.type == pygame.QUIT:
                 return False
             elif ev.type == pygame.MOUSEBUTTONDOWN:
-                 if self.ball.verifica_ammo():
+                if self.ball.verifica_ammo():
                     if self.ball.get_status() == 'NÃO LANÇADA':
                         self.assets['slice_sound'].set_volume(0.15)
                         self.assets['slice_sound'].play()
-                    self.ball.lancamento(pygame.mouse.get_pos())
+                        self.ball.lancamento(pygame.mouse.get_pos())
         # Atualiza a posição da bola
         if self.ball.existe:
             self.ball.atualiza()
-            print(self.isinalcance(self.ball.posicao[0], self.ball.posicao[1]))
         if self.ball.ammo <= 0:
             self.next_screen = 'derrota'
             return gerenciadorTelas.GerenciadorTelas(self.window).set_state(self.next_screen)

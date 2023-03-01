@@ -50,14 +50,8 @@ class MadeiraSprite(pygame.sprite.Sprite):
         self.vida = life
         self.set_image(life, self.type)
     
-    def check_in_orbit(self, pos):
-        if (pos[0]-self.x-50)**2 + (pos[1]-self.y-100)**2 <= self.raio**2:
-            return True
-        return False
-    
     def render(self, window, assets):
         if not self.morta:
-            window.blit(pygame.transform.scale(assets[self.image], (100, 200)), (self.x, self.y))
-            pygame.draw.circle(window, (255, 0, 0), (self.x+50, self.y+100), self.raio, 1)
+            window.blit(assets[self.image], (self.x, self.y))
         else:
             window.blit(assets[self.image], (self.x, self.y+100))
