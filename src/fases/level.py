@@ -21,7 +21,6 @@ class level():
         self.victory = False
         #Imagens
         self.assets = {
-            # 'catapulta': pygame.image.load(os.path.join('assets', 'images', 'catapulta.png')),
             'chop_wood': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'chop_wood.wav')),
             'cut_enemy_sound': pygame.mixer.Sound(os.path.join('assets', 'sounds', 'cut_enemy.wav')),
             'enemy1': pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')),(113,150)),
@@ -69,6 +68,7 @@ class level():
         self.enemy = Enemy.Enemy(self.level)
         self.planetas = Planet.Planet.change_level(self.level, self.assets['space_ninja_cat'])
 
+    # Função que cria os sprites das madeiras e retorna um grupo de sprites com as madeiras
     def cria_sprites_e_madeiras(self):
         madeiras_sprite = pygame.sprite.Group()
         madeiras = Madeira.MadeiraSprite.change_level(self.level)
@@ -116,6 +116,7 @@ class level():
                 if self.level == 4:
                     self.victory = True
                     self.level = 3
+                # De acordo com o level, a há mudanças nos inimigos, madeiras e planetas
                 self.enemy.change_level(self.level)
                 self.madeiras_sprite = self.cria_sprites_e_madeiras()
                 self.ball.posicao = self.posicao_inicial

@@ -12,7 +12,7 @@ class MadeiraSprite(pygame.sprite.Sprite):
         self.vida = vida
         self.image = None
         self.raio = 200
-        self.morta = False
+        self.morta = False # Se a madeira está morta ou não
         self.disaparece = disaparece
         
         if type == 'left':
