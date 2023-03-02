@@ -6,7 +6,7 @@ import os
 # Classe que representa a primeira tela do jogo, com um botão para iniciar o jogo e outro para sair
 class Home:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'tuto'
         self.screen_name = 'home'
         self.display = display
@@ -19,8 +19,8 @@ class Home:
 
     # Desenha a tela inicial
     def desenha(self, display):
-        fundo = pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg'))
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 100)
+        fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 100)
         self.display = display
         self.display.blit(fundo, (0, 0))
         text = font.render('Space Ninjas With Attitude', True, (255, 255, 255))

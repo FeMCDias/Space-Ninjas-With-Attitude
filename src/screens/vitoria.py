@@ -6,7 +6,7 @@ import os
 # Classe que representa a tela de vitória, com um botão para reiniciar o jogo e outro para sair
 class Vitoria:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'chooseWeapon'
         self.screen_name = 'vitoria'
         self.display = display
@@ -19,7 +19,7 @@ class Vitoria:
 
     # Desenha a tela de vitória
     def desenha(self, display):
-        fundo = pygame.image.load(os.path.join('assets', 'images', 'back_victory.jpg'))
+        fundo = pygame.image.load(os.path.join('src','assets', 'images', 'back_victory.jpg'))
         self.display = display
         self.display.blit(fundo, (0, 0))
         for button in self.buttons:
