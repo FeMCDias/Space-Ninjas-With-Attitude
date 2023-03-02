@@ -19,6 +19,7 @@ Ao longo do desenvolvimento do jogo, a equipe responsável pela criação teve q
 O resultado final do projeto foi um jogo divertido e desafiador, que uniu o aprendizado teórico da disciplina com a prática de programação e desenvolvimento de jogos. O jogo "Space Ninjas With Attitude" é um exemplo de como a tecnologia pode ser utilizada como ferramenta de ensino, permitindo que os alunos desenvolvam suas habilidades e coloquem em prática os conhecimentos adquiridos em sala de aula.
 
 # 2.Vídeo
+
 Link: https://www.youtube.com/watch?v=G_kvQDHNcSc
 
 # 3. Como rodar?
@@ -47,6 +48,7 @@ pip install -r requirements.txt
  Para rodar o jogo, procure o arquivo 'main.py' - Localizado em src\main.py - diretório do projeto
 
 # 4. Formulação matemática | Modelo Físico:
+
 
 ## 4.1 Força gravitacional - Planetas
 ```
@@ -116,10 +118,3 @@ A função calcula a nova posição da bola após um curto período de tempo. A 
 O cálculo da nova posição é feito através da multiplicação da velocidade por um fator de tempo fixo de 0.1 e, em seguida, adicionando esse valor à posição atual da bola. Isso assume que a velocidade da bola é constante durante esse período de tempo curto.
 
 Assim, a função "movimentar_bola" retorna a nova posição da bola após ela ter sido movida por um curto período de tempo.
-
-
-
-
-
-
-
