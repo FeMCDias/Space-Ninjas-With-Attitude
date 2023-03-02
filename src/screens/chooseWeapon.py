@@ -5,9 +5,11 @@ import fases.level as level
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a tela onde o usuário pode escolher a arma que irá utilizar
+# De acordo com a arma escolhida, o jogador irá utilizar recursos diferentes para vencer os inimigos
 class chooseWeapon:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'level'
         self.screen_name = 'chooseWeapon'
         self.display = display
@@ -22,10 +24,10 @@ class chooseWeapon:
         self.level = 1
         self.clicked = False
         self.ninjas = {
-            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'katana-ninja.png')), (118, 110)),
-            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'shuriken-ninja.png')), (76, 110)),
-            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join( 'assets', 'images', 'kunai-ninja.png')), (115, 90))}
-        self.fundo = pygame.image.load(os.path.join( 'assets', 'images', 'space-ninja-temple.jpg'))
+            'katana_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'katana-ninja.png')), (118, 110)),
+            'shuriken_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'shuriken-ninja.png')), (76, 110)),
+            'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')), (115, 90))}
+        self.fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
         self.font = pygame.font.SysFont('Bauhaus 93', 30)
     def desenha(self, display):
         self.display.blit(self.fundo, (0, 0))
@@ -48,6 +50,7 @@ class chooseWeapon:
 
         pygame.display.update()
 
+    # Função que atualiza o estado da tela de acordo com a escolha do usuário
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -70,7 +73,8 @@ class chooseWeapon:
     
     def get_state(self):
         return self.state
-    
+
+    # Função que retorna as informações que serão passadas para a próxima tela
     def information_next_screen(self):
         return {
             'weapon': self.state['weapon'].name,

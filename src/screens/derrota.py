@@ -3,9 +3,10 @@ from interface import *
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a tela de derrota, com um botão para reiniciar o jogo e outro para sair
 class Derrota:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'chooseWeapon'
         self.screen_name = 'derrota'
         self.display = display
@@ -16,8 +17,9 @@ class Derrota:
         self.buttons[1].add_text('Quit')
         self.state = {}
 
+    # Desenha a tela de derrota 
     def desenha(self, display):
-        fundo = pygame.image.load(os.path.join('assets', 'images', 'back_defeat.jpg'))
+        fundo = pygame.image.load(os.path.join('src','assets', 'images', 'back_defeat.jpg'))
         self.display = display
         self.display.blit(fundo, (0, 0))
         for button in self.buttons:
@@ -25,6 +27,7 @@ class Derrota:
             button.draw(self.display)
         pygame.display.update()
 
+    # Atualiza o estado da tela de derrota, caso o botão de reiniciar o jogo seja clicado, o jogo é reiniciado
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

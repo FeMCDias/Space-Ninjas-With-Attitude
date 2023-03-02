@@ -3,9 +3,10 @@ from interface import *
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a tela de tutorial, com um botão para continuar e outro para sair
 class Tuto:
     def __init__(self, display):
-        font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 50)
+        font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
         self.next_screen = 'chooseWeapon'
         self.screen_name = 'tuto'
         self.display = display
@@ -15,16 +16,17 @@ class Tuto:
         self.buttons.append(Button(self.buttons[0].x + self.buttons[0].w + 150, self.buttons[0].y, 200, 100, None, (255, 0, 0), font, (0, 0, 0), 30))
         self.buttons[1].add_text('Quit')
         self.state = {}
-        self.fundo = pygame.image.load(os.path.join('assets', 'images', 'space-ninja-temple.jpg'))
-        self.title_font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 100)
-        self.font = pygame.font.Font(os.path.join('assets', 'fonts', 'Karasha.ttf'), 40)
+        self.fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
+        self.title_font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 100)
+        self.font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 40)
         self.enemies = {
-            'enemy1':pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy1.png')), (113, 150)),
-            'enemy2':pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy2.png')), (113, 150)),
-            'enemy3':pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'enemy3.png')), (113, 150)),
+            'enemy1':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy1.png')), (113, 150)),
+            'enemy2':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy2.png')), (113, 150)),
+            'enemy3':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy3.png')), (113, 150)),
                         }
-        self.spacecat = pygame.transform.scale(pygame.image.load(os.path.join('assets', 'images', 'space_ninja_cat.png')),(150,150))
+        self.spacecat = pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'space_ninja_cat.png')),(150,150))
 
+    # Desenha a tela de tutorial, com um texto explicando como jogar e dois botões para continuar ou sair
     def desenha(self, display):
         self.display = display
         self.display.blit(self.fundo, (0, 0))
@@ -50,6 +52,7 @@ class Tuto:
         self.display.blit(self.spacecat, (self.display.get_width()/2 - text.get_width()/2, 465))
         pygame.display.update()
 
+    # Checa o estado da tela, caso algum botão seja clicado, ele muda o estado da tela
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

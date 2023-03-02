@@ -1,4 +1,9 @@
+# A classe "Weapon" define uma arma com atributos como nome, peso, dano e munição. 
+# Possui um construtor que recebe nome e nível, um método para trocar o tipo de arma e
+# três métodos para retornar a quantidade de munição, dano e nome da arma. 
 class Weapon:
+    # Ao instanciar a classe, o construtor recebe o nome da arma e o nível do jogador
+    # e define os atributos da arma de acordo com o nome e nível
     def __init__(self, name, level):
         self.name = name
         if name == 'shuriken':
@@ -19,6 +24,7 @@ class Weapon:
         else:
             raise Exception('Invalid weapon name')
         
+    # Método para trocar o tipo de arma
     def change_type(self, name, level):
         self.name = name
         if name == 'shuriken':
@@ -38,7 +44,8 @@ class Weapon:
             self.ammo = 3 + level * 2
         else:
             raise Exception('Invalid weapon name')
-        
+
+    # Métodos para retornar a quantidade de munição, dano e nome da arma 
     def get_ammo(self):
         return self.ammo
     
