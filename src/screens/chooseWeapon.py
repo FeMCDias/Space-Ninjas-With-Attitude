@@ -5,6 +5,8 @@ import fases.level as level
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a tela onde o usuário pode escolher a arma que irá utilizar
+# De acordo com a arma escolhida, o jogador irá utilizar recursos diferentes para vencer os inimigos
 class chooseWeapon:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
@@ -27,6 +29,7 @@ class chooseWeapon:
             'kunai_ninja':pygame.transform.scale( pygame.image.load(os.path.join('src','assets', 'images', 'kunai-ninja.png')), (115, 90))}
         self.fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
 
+    # Função que desenha a tela
     def desenha(self, display):
         self.display.blit(self.fundo, (0, 0))
         self.display = display
@@ -39,6 +42,7 @@ class chooseWeapon:
         self.display.blit(self.ninjas['kunai_ninja'], (350, 500))
         pygame.display.update()
 
+    # Função que atualiza o estado da tela de acordo com a escolha do usuário
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -61,7 +65,8 @@ class chooseWeapon:
     
     def get_state(self):
         return self.state
-    
+
+    # Função que retorna as informações que serão passadas para a próxima tela
     def information_next_screen(self):
         return {
             'weapon': self.state['weapon'].name,

@@ -1,7 +1,8 @@
 import pygame
 import numpy as np
 
-
+# Classe que cria uma madeira que é responsável por atrapalhar o jogador (um obstáculo)
+# Essa utiliza Sprite, que é uma classe do pygame que facilita a criação de objetos que se movem
 class MadeiraSprite(pygame.sprite.Sprite):
     def __init__(self, type, x, y, vida=100, gravidade=0.5):
         super().__init__()
@@ -22,6 +23,7 @@ class MadeiraSprite(pygame.sprite.Sprite):
     def get_center(self):
         return np.array([self.x+50, self.y+100])
 
+    # Setta a imagem da madeira de acordo com a vida que ela tem
     def set_image(self, life, type):
         if type == 'left':
             if life == 100:
@@ -46,10 +48,12 @@ class MadeiraSprite(pygame.sprite.Sprite):
             elif life <= 0:
                 self.image = 'madeira_right_rotate'
 
+    # Setta a vida da madeira
     def set_life(self, life):
         self.vida = life
         self.set_image(life, self.type)
     
+    # Verifica se a madeira está morta ou não, se estiver, ela cai
     def render(self, window, assets):
         if not self.morta:
             window.blit(assets[self.image], (self.x, self.y))

@@ -1,6 +1,8 @@
 import pygame
 import math
 import numpy as np
+
+# Classe que define os atributos de um planeta, esse é o nosso atrator gravitacional
 class Planet():
     def __init__(self, x, y,raio, alcance,c, image):
         self.x = x

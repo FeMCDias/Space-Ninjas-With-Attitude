@@ -3,6 +3,7 @@ from interface import *
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a tela de tutorial, com um botão para continuar e outro para sair
 class Tuto:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
@@ -24,6 +25,7 @@ class Tuto:
             'enemy3':pygame.transform.scale(pygame.image.load(os.path.join('src','assets', 'images', 'enemy3.png')), (113, 150))
                         }
 
+    # Desenha a tela de tutorial, com um texto explicando como jogar e dois botões para continuar ou sair
     def desenha(self, display):
         self.display = display
         self.display.blit(self.fundo, (0, 0))
@@ -48,6 +50,7 @@ class Tuto:
         self.display.blit(text, (self.display.get_width()/2 - text.get_width()/2, 400))
         pygame.display.update()
 
+    # Checa o estado da tela, caso algum botão seja clicado, ele muda o estado da tela
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

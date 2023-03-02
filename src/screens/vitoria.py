@@ -3,6 +3,7 @@ from interface import *
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a tela de vitória, com um botão para reiniciar o jogo e outro para sair
 class Vitoria:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
@@ -16,6 +17,7 @@ class Vitoria:
         self.buttons[1].add_text('Quit')
         self.state = {}
 
+    # Desenha a tela de vitória
     def desenha(self, display):
         fundo = pygame.image.load(os.path.join('src','assets', 'images', 'back_victory.jpg'))
         self.display = display
@@ -25,6 +27,7 @@ class Vitoria:
             button.draw(self.display)
         pygame.display.update()
 
+    # Atualiza o estado da tela de vitória, caso o botão de reiniciar o jogo seja clicado, o jogo é reiniciado
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

@@ -3,6 +3,7 @@ from interface import *
 import screens.gerenciadorTelas as gerenciadorTelas
 import os
 
+# Classe que representa a primeira tela do jogo, com um botão para iniciar o jogo e outro para sair
 class Home:
     def __init__(self, display):
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 50)
@@ -16,6 +17,7 @@ class Home:
         self.buttons[1].add_text('Quit')
         self.state = {}
 
+    # Desenha a tela inicial
     def desenha(self, display):
         fundo = pygame.image.load(os.path.join('src','assets', 'images', 'space-ninja-temple.jpg'))
         font = pygame.font.Font(os.path.join('src','assets', 'fonts', 'Karasha.ttf'), 100)
@@ -30,6 +32,7 @@ class Home:
             button.draw(self.display)
         pygame.display.update()
 
+    # Atualiza o estado da tela inicial, caso o botão de iniciar o jogo seja clicado, o jogo é iniciado
     def atualiza_estado(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
